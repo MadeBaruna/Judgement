@@ -1,0 +1,88 @@
+.menu-header {
+    height: 50px;
+}
+
+.main {
+    padding-top: 75px;
+    min-height: calc(100% - 50px);
+}
+
+.ui .grid {
+    margin: -1rem -1rem 0 -1rem;
+}
+
+.profile h2,
+.profile h4 {
+    margin: 0;
+}
+
+.profile h4 {
+    color: #7f8c8d;
+}
+
+.profile h2 {
+    margin-bottom: 10px;
+}
+
+.profile .image {
+    cursor: pointer;
+}
+
+.ui.action.input input[type="file"] {
+    display: none;
+}
+
+.profile_modal .progress {
+    visibility: hidden;
+}
+
+.profile_modal .error p {
+    display: none;
+}
+
+.footer {
+    padding: 1rem;
+}
+
+/*contest*/
+h3,
+h4 {
+    margin: 0 !important;
+}
+
+h4 {
+    color: #7f8c8d !important;
+}
+
+h4:not(:first-child) {
+    margin-top: 10px !important;
+}
+
+.contests .ui.label,
+.problems .ui.label {
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.problems textarea {
+    font-family: monospace;
+}
+
+.markdown-body {
+    padding: 25px;
+}
+
+.markdown-body h1.title {
+    border: 0;
+    text-align: center;
+}
+
+.markdown-body table.rules {
+    margin-left: auto;
+    margin-right: auto;
+    width: 260px;
+}
+
+.markdown-body table.rules td {
+    width: 130px;
+}

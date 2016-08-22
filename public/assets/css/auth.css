@@ -1,0 +1,21 @@
+.grid {
+    height: 100%;
+}
+
+body {
+    background-color: #ecf0f1;
+}
+
+.box {
+    width: 450px;
+}
+
+.ui.buttons {
+    margin-top: 1rem;
+}
+
+.ui.checkbox[class*="left floated"] {
+    float: left !important;
+    height: 30px !important;
+    margin-left: 1em !important;
+}
