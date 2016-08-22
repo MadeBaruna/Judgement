@@ -69,6 +69,10 @@
                                data-tooltip="Edit">
                                 <i class="edit icon"></i>
                             </a>
+                            <a href="{{ url('admin/problem/' . $problem->id . '/testcases') }}" class="ui button"
+                               data-tooltip="Testcase">
+                                <i class="book icon"></i>
+                            </a>
                         </div>
                     </td>
                 </tr>

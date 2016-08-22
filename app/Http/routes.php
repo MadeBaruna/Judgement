@@ -50,6 +50,11 @@ Route::post('admin/problems/new', 'Admin\AdminProblem@newProblemPost');
 Route::get('admin/problems/edit/{id}', 'Admin\AdminProblem@editProblem');
 Route::post('admin/problems/edit/{id}', 'Admin\AdminProblem@editProblemPost');
 Route::post('admin/problems/delete/{id}', 'Admin\AdminProblem@deleteProblemPost');
+
+Route::get('admin/problem/{id}/testcases', 'Admin\AdminTestcase@testcases');
+Route::get('admin/problem/{id}/testcase/{testcase}', 'Admin\AdminTestcase@viewTestcase');
+Route::post('admin/problem/{id}/testcases/delete', 'Admin\AdminTestcase@deleteTestCasePost');
+Route::post('admin/problem/{id}/testcases', 'Admin\AdminTestcase@newTestcasePost');
 //end admin dashboard
 
 Route::get('time', 'Time@getCurrentTime');

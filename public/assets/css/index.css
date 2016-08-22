@@ -28,7 +28,7 @@
     cursor: pointer;
 }
 
-.ui.action.input input[type="file"] {
+.ui.input input[type="file"] {
     display: none;
 }
 

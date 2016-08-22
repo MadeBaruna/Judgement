@@ -1,4 +1,4 @@
-$(function() {
+$(function () {
     $('.ui.dropdown.type').dropdown();
 
     $('.ui.dropdown.language').dropdown();
@@ -9,11 +9,11 @@ $(function() {
         allowAdditions: true
     });
 
-    $('.start_date').on('change keyup paste', function() {
+    $('.start_date').on('change keyup paste', function () {
         updateDateTime('.start')
     });
 
-    $('.end_date').on('change keyup paste', function() {
+    $('.end_date').on('change keyup paste', function () {
         updateDateTime('.end')
     });
 
@@ -21,14 +21,32 @@ $(function() {
     updateDateTime('.end');
 
     var deleteContestModal = $('.ui.modal.delete_contest_modal');
-    if(deleteContestModal.length) {
+    if (deleteContestModal.length) {
         deleteContestModal.modal('attach events', '.delete_contest', 'show');
     }
 
     var deleteProblemModal = $('.ui.modal.delete_problem_modal');
-    if(deleteProblemModal.length) {
+    if (deleteProblemModal.length) {
         deleteProblemModal.modal('attach events', '.delete_problem', 'show');
     }
+
+    $('input:text, .ui.button').click(function (e) {
+        $($(e.target)).siblings('input:file').click();
+    });
+
+    $('input:file').on('change', function (e) {
+        var name = e.target.files[0].name;
+        $('input:text', $(e.target).parent()).val(name);
+    });
+
+    $('.testcase_list tr').click(function () {
+        $(this).toggleClass('active');
+        $('.testcase_input').val(
+            $('tr.active .testcase_id').map(function () {
+                return $(this).text();
+            }).get().join()
+        );
+    });
 });
 
 function updateDateTime(type) {

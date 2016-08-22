@@ -32,4 +32,9 @@ class Problem extends Model
     {
         return $this->belongsTo('Judgement\User');
     }
+
+    public function testcases()
+    {
+        return $this->hasMany('Judgement\Testcase');
+    }
 }
