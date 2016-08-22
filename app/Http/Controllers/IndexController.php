@@ -4,6 +4,7 @@ namespace Judgement\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Judgement\Http\Requests;
+use Auth;
 
 class IndexController extends Controller
 {
@@ -11,6 +12,16 @@ class IndexController extends Controller
 
     public function index()
     {
-        return view('index', ['contests' => $this->getContests()]);
+        if(Auth::check()) {
+            if(Auth::user()->type == 'admin') {
+                $contest = $this->getContests();
+            } else {
+                $contest = $this->getAvailableContests();
+            }
+        } else {
+            $contest = [];
+        }
+
+        return view('index', ['contests' => $contest]);
     }
 }

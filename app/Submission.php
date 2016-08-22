@@ -5,29 +5,6 @@ namespace Judgement;
 use Illuminate\Database\Eloquent\Model;
 use Judgement\Judgement;
 
-/**
- * Judgement\Submission
- *
- * @property-read \Judgement\Problem $problem
- * @property-read \Judgement\User $user
- * @mixin \Eloquent
- * @property integer $id
- * @property integer $problem_id
- * @property integer $group_id
- * @property integer $user_id
- * @property string $language
- * @property string $status
- * @property string $submitted_at
- * @property string $filename
- * @method static \Illuminate\Database\Query\Builder|\Judgement\Submission whereId($value)
- * @method static \Illuminate\Database\Query\Builder|\Judgement\Submission whereProblemId($value)
- * @method static \Illuminate\Database\Query\Builder|\Judgement\Submission whereGroupId($value)
- * @method static \Illuminate\Database\Query\Builder|\Judgement\Submission whereUserId($value)
- * @method static \Illuminate\Database\Query\Builder|\Judgement\Submission whereLanguage($value)
- * @method static \Illuminate\Database\Query\Builder|\Judgement\Submission whereStatus($value)
- * @method static \Illuminate\Database\Query\Builder|\Judgement\Submission whereSubmittedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\Judgement\Submission whereFilename($value)
- */
 class Submission extends Model
 {
     public function problem()

@@ -80,7 +80,8 @@
                     </td>
                     @if($type != 'admin')
                         <td class="collapsing">
-                            <a href="{{ url('/contest/' . $contest->id) }}" class="ui labeled icon {{ $contest->status == 'Not Started' ? 'teal' : 'primary' }} fluid button">
+                            <a href="{{ url('/contest/' . $contest->id) }}"
+                               class="ui labeled icon {{ $contest->status == 'Not Started' ? 'teal' : 'primary' }} fluid button">
                                 <i class="sign in icon"></i>
                                 @if($contest->status == 'Not Started')
                                     <label class="time_button" data-id="{{ $contest->id }}">Not Started</label>
@@ -89,13 +90,15 @@
                                 @endif
                             </a>
                         </td>
+                    @else
+                        <td></td>
                     @endif
                 </tr>
             @endforeach
             @if(count($contests) == 0)
                 <tr>
                     <td colspan="7">
-                        No contest yet
+                        No contest available for you.
                     </td>
                 </tr>
             @endif

@@ -22,7 +22,7 @@ $(function () {
         }
     });
 
-    countdown.setLabels('ms|s|m|h|D|M|Y', 'ms|s|m|h|D|M|Y', ' ', ' ', 'START', null);
+    countdown.setLabels('ms|s|m|h|D|W|M|Y', 'ms|s|m|h|D|W|M|Y', ' ', ' ', 'START', null);
     $('.start_time_index').each(function() {
         $id = $(this).data('id');
         $datetime = $(this).data('datetime');
