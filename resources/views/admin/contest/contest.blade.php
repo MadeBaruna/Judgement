@@ -82,14 +82,16 @@
                     </td>
                     <td>
                         <div class="ui icon buttons">
-                            <a href="{{ url('admin/contest/' . $contest->id) }}" class="ui icon button" data-tooltip="Summary">
+                            <a href="{{ url('/admin/contest/' . $contest->id) }}" class="ui icon button"
+                               data-tooltip="Summary">
                                 <i class="info icon"></i>
                             </a>
-                            <a href="{{ url('admin/contests/edit/' . $contest->id) }}" class="ui button"
+                            <a href="{{ url('/admin/contests/edit/' . $contest->id) }}" class="ui button"
                                data-tooltip="Edit">
                                 <i class="edit icon"></i>
                             </a>
-                            <a class="ui button" data-tooltip="Problems">
+                            <a href="{{ url('/admin/contest/' . $contest->id . '/problems') }}" class="ui button"
+                               data-tooltip="Problems">
                                 <i class="cube icon"></i>
                             </a>
                         </div>

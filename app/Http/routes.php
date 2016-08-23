@@ -41,6 +41,10 @@ Route::get('admin/contests/edit/{id}', 'Admin\AdminContest@editContest');
 Route::post('admin/contests/edit/{id}', 'Admin\AdminContest@editContestPost');
 Route::post('admin/contests/delete/{id}', 'Admin\AdminContest@deleteContestPost');
 
+Route::get('admin/contest/{id}/problems', 'Admin\AdminContestProblem@problems');
+Route::post('admin/contest/{id}/problems/add', 'Admin\AdminContestProblem@addProblemPost');
+Route::post('admin/contest/{id}/problems/delete', 'Admin\AdminContestProblem@deleteProblemPost');
+
 Route::get('admin/problems', 'Admin\AdminProblem@problems');
 Route::get('admin/problem/{id}', 'Admin\AdminProblem@problemSummary');
 

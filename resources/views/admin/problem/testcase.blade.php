@@ -74,7 +74,7 @@
                 </div>
             </form>
         </div>
-        <table class="ui selectable compact table testcase_list">
+        <table class="ui selectable compact table table_list">
             <thead>
             <tr>
                 <th>
@@ -92,7 +92,7 @@
             <tbody>
             @foreach($testcases as $testcase)
                 <tr>
-                    <td class="testcase_id">{{ $testcase->id }}</td>
+                    <td class="table_list_id">{{ $testcase->id }}</td>
                     <td>{{ $testcase->input_size }} bytes</td>
                     <td>{{ $testcase->output_size }} bytes</td>
                     <td>
@@ -116,7 +116,7 @@
                     <th colspan="4">
                         <form method="POST" action="{{ url('/admin/problem/' . $problem->id . '/testcases/delete/') }}">
                             {{ csrf_field() }}
-                            <input class="testcase_input" name="testcase" type="hidden">
+                            <input class="table_list_input" name="testcase" type="hidden">
                             <button class="ui right floated red labeled icon button">
                                 <i class="trash icon"></i>
                                 Delete Selected

@@ -35,10 +35,10 @@ $(function () {
         $('input:text', $(e.target).parent()).val(name);
     });
 
-    $('.testcase_list tr').click(function () {
+    $('.table_list tr').click(function () {
         $(this).toggleClass('active');
-        $('.testcase_input').val(
-            $('tr.active .testcase_id').map(function () {
+        $('.table_list_input').val(
+            $('tr.active .table_list_id').map(function () {
                 return $(this).text();
             }).get().join()
         );
