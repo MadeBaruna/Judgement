@@ -97,12 +97,14 @@ class AdminContest extends Controller
         $contest->categories()->attach($categories);
 
         $emails = explode(',', $data['allowed_user']);
-        foreach ($emails as $email) {
-            $allowedUser = AllowedUser::create([
-                'contest_id' => $contest->id,
-                'email' => $email
-            ]);
-            $contest->allowedUsers()->save($allowedUser);
+        if ($data['allowed_user'] != '') {
+            foreach ($emails as $email) {
+                $allowedUser = AllowedUser::create([
+                    'contest_id' => $contest->id,
+                    'email' => $email
+                ]);
+                $contest->allowedUsers()->save($allowedUser);
+            }
         }
 
         return $this->returnContestView();

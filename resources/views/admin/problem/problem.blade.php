@@ -32,7 +32,7 @@
             <thead>
             <tr>
                 <th class="collapsing">
-                    No
+                    ID
                 </th>
                 <th>
                     Problem Name
@@ -54,7 +54,7 @@
             @foreach($problems as $problem)
                 <tr>
                     @php($no++)
-                    <td class="center aligned">{{ $no }}</td>
+                    <td class="center aligned">{{ $problem->id }}</td>
                     <td>{{ $problem->name }}</td>
                     <td>{{ Judgement\User::find($problem->author_id)->first()->name }}</td>
                     <td class="center aligned">{{ $problem->time_limit }}</td>
