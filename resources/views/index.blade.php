@@ -8,8 +8,8 @@
     @endphp
     <div class="ui container">
         @if($type == 'admin')
-            <h1>Active Contest</h1>
-            <p>Active contest that available to users, you can manage this on your admin dashboard.</p>
+            <h1>Contest List</h1>
+            <p>You can manage this on your admin dashboard.</p>
         @else
             <h1>Available Contest</h1>
             <p>You can join any contest available below.</p>

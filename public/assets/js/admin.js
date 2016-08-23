@@ -30,10 +30,6 @@ $(function () {
         deleteProblemModal.modal('attach events', '.delete_problem', 'show');
     }
 
-    $('input:text, .ui.button').click(function (e) {
-        $($(e.target)).siblings('input:file').click();
-    });
-
     $('input:file').on('change', function (e) {
         var name = e.target.files[0].name;
         $('input:text', $(e.target).parent()).val(name);

@@ -82,6 +82,25 @@ class AdminTestcase extends Controller
             }
         }
 
-        return redirect()->back();
+        return redirect('/admin/problem/' . $id . '/testcases');
+    }
+
+    public function viewTestcase($id, $testcase)
+    {
+        $problem = Problem::findOrFail($id);
+        $testcase = Testcase::findOrFail($testcase);
+
+        $path = storage_path('problems/' . $id . '/testcases/');
+        $fileNameInput = $testcase->id . '.in';
+        $fileNameOutput = $testcase->id . '.out';
+
+        $input = file_get_contents($path . $fileNameInput);
+        $output = file_get_contents($path . $fileNameOutput);
+        return view('admin/problem/viewtestcase', [
+            'problem' => $problem,
+            'testcase' => $testcase,
+            'input' => $input,
+            'output' => $output
+        ]);
     }
 }

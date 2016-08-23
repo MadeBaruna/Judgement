@@ -18,8 +18,8 @@ $(function () {
         }).modal('attach events', '.profile .image', 'show');
     }
 
-    $('input:text, .ui.button', '.ui.action.input').on('click', function(e) {
-        $('input:file', $(e.target).parents()).click();
+    $('input:text, .ui.button').click(function (e) {
+        $($(e.target)).siblings('input:file').click();
     });
 
     var ajaxUpload;
