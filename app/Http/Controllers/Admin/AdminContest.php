@@ -86,7 +86,8 @@ class AdminContest extends Controller
             'start_time' => $data['start_time'],
             'end_time' => $data['end_time'],
             'status' => $status,
-            'active' => $active
+            'active' => $active,
+            'announcement' => $data['announcement']
         ]);
 
         $languages = explode(',', $data['language']);
@@ -179,7 +180,8 @@ class AdminContest extends Controller
             'start_time' => $data['start_time'],
             'end_time' => $data['end_time'],
             'status' => $status,
-            'active' => $active
+            'active' => $active,
+            'announcement' => $data['announcement']
         ]);
 
         $languages = explode(',', $data['language']);

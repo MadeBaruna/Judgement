@@ -45,16 +45,16 @@
 }
 
 /*contest*/
-h3,
-h4 {
+.contests h3,
+.contests h4 {
     margin: 0 !important;
 }
 
-h4 {
+.contests h4 {
     color: #7f8c8d !important;
 }
 
-h4:not(:first-child) {
+.contests h4:not(:first-child) {
     margin-top: 10px !important;
 }
 
@@ -64,7 +64,8 @@ h4:not(:first-child) {
     margin-bottom: 10px;
 }
 
-.problems textarea {
+.problems textarea,
+.contests textarea {
     font-family: monospace;
 }
 

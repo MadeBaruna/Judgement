@@ -177,6 +177,14 @@
                     <label>Active this contest immediately?</label>
                 </div>
             </div>
+            <div class="field">
+                <label>
+                    Announcement<br/>
+                    <a target="_blank" href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">Markdown
+                        Cheatsheet</a>
+                </label>
+                <textarea name="announcement" rows="10">{{ old('statement') }}</textarea>
+            </div>
             <button type="submit" class="ui primary submit button">Add</button>
             <a href="{{ url('/admin/contests') }}" class="ui button">Cancel</a>
 

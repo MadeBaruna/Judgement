@@ -20,6 +20,7 @@ class CreateContestTable extends Migration
             $table->dateTime('end_time');
             $table->string('status');
             $table->boolean('active')->default(0);
+            $table->text('announcement');
         });
     }
 

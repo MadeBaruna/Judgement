@@ -5,7 +5,8 @@
 @section('active_contests', 'active')
 
 @section('admin_breadcrumb')
-    <a href="{{ url('/admin/contests/edit/' . $contest->id) }}" class="ui right floated labeled icon button delete_contest">
+    <a href="{{ url('/admin/contests/edit/' . $contest->id) }}"
+       class="ui right floated labeled icon button delete_contest">
         <i class="edit icon"></i>
         Edit Contest
     </a>
@@ -49,11 +50,11 @@
         <h3 class="end_time">{{ $endDateTime }}</h3>
         <h4>Programming Languages</h4>
         @if(count($languages) > 0)
-        @foreach($languages as $language)
-            <div class="ui black label">
-                {{ $language->name }}
-            </div>
-        @endforeach
+            @foreach($languages as $language)
+                <div class="ui black label">
+                    {{ $language->name }}
+                </div>
+            @endforeach
         @else
             <h3>No language</h3>
         @endif
@@ -96,5 +97,9 @@
         </div>
         <h4>Status</h4>
         <h3>{{ $contest->status }} <span class="timer"></span></h3>
+        <h4>Announcement</h4>
+    </div>
+    <div>
+        <div class="markdown-body">@markdown($contest->announcement)</div>
     </div>
 @endsection

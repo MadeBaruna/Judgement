@@ -15,7 +15,8 @@ class Contest extends Model
         'start_time',
         'end_time',
         'status',
-        'active'
+        'active',
+        'announcement'
     ];
 
     public function updateStatus()
