@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProblemsTable extends Migration
+class CreateGroupTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,13 +12,13 @@ class CreateProblemsTable extends Migration
      */
     public function up()
     {
-        Schema::create('problems', function (Blueprint $table) {
+        Schema::create('groups', function (Blueprint $table) {
             $table->increments('id');
+
+            $table->integer('leader_id')->unsigned();
+            $table->foreign('leader_id')->references('id')->on('users')->onDelete('cascade');
+
             $table->string('name');
-            $table->text('statement');
-            $table->unsignedSmallInteger('time_limit')->default(0);
-            $table->unsignedSmallInteger('memory_limit')->default(0);
-            $table->integer('author_id');
         });
     }
 
@@ -29,6 +29,6 @@ class CreateProblemsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('problems');
+        Schema::drop('groups');
     }
 }

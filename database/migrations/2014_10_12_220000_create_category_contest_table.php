@@ -13,8 +13,11 @@ class CreateCategoryContestTable extends Migration
     public function up()
     {
         Schema::create('category_contest', function (Blueprint $table) {
-            $table->increments('category_id');
-            $table->string('contest_id');
+            $table->integer('category_id')->unsigned()->index();
+            $table->integer('contest_id')->unsigned()->index();
+
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreign('contest_id')->references('id')->on('contests')->onDelete('cascade');
         });
     }
 

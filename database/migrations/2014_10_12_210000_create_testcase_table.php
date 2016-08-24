@@ -14,9 +14,11 @@ class CreateTestcaseTable extends Migration
     {
         Schema::create('testcases', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('problem_id');
+            $table->integer('problem_id')->unsigned();
             $table->unsignedInteger('input_size');
             $table->unsignedInteger('output_size');
+
+            $table->foreign('problem_id')->references('id')->on('problems')->onDelete('cascade');
         });
     }
 

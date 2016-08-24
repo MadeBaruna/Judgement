@@ -93,11 +93,13 @@ class AdminContest extends Controller
         $languages = explode(',', $data['language']);
         $contest->languages()->attach($languages);
 
-        $categories = explode(',', $data['category']);
-        $contest->categories()->attach($categories);
+        if ($data['category'] != '') {
+            $categories = explode(',', $data['category']);
+            $contest->categories()->attach($categories);
+        }
 
-        $emails = explode(',', $data['allowed_user']);
         if ($data['allowed_user'] != '') {
+            $emails = explode(',', $data['allowed_user']);
             foreach ($emails as $email) {
                 $allowedUser = AllowedUser::create([
                     'contest_id' => $contest->id,
@@ -190,12 +192,14 @@ class AdminContest extends Controller
         $contest->languages()->detach();
         $contest->languages()->attach($languages);
 
-        $categories = explode(',', $data['category']);
         $contest->categories()->detach();
-        $contest->categories()->attach($categories);
+        if ($data['category'] != '') {
+            $categories = explode(',', $data['category']);
+            $contest->categories()->attach($categories);
+        }
 
         $contest->allowedUsers()->delete();
-        if($data['allowed_user'] != '') {
+        if ($data['allowed_user'] != '') {
             $emails = explode(',', $data['allowed_user']);
             foreach ($emails as $email) {
                 $allowedUser = AllowedUser::create([

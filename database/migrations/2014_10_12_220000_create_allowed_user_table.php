@@ -13,8 +13,10 @@ class CreateAllowedUserTable extends Migration
     public function up()
     {
         Schema::create('allowed_users', function (Blueprint $table) {
-            $table->integer('contest_id');
+            $table->integer('contest_id')->unsigned()->index();
             $table->string('email');
+
+            $table->foreign('contest_id')->references('id')->on('contests')->onDelete('cascade');
         });
     }
 
