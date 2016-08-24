@@ -21,6 +21,7 @@ class ContestCheck
     {
         $contestId = $request->route('id');
         $contest = Contest::findOrFail($contestId);
+        $contest->updateStatus();
         $contestType = $contest->type;
 
         if ($contest->status == 'Not Started') {

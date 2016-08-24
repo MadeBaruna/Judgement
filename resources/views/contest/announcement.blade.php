@@ -21,9 +21,11 @@
 @endsection
 
 @section('contest_content')
-    <div class="announcement">
-        <div class="markdown-body">
-            @markdown($contest->announcement)
+    <div class="ui bottom attached segment">
+        <div class="announcement">
+            <div class="markdown-body">
+                @markdown($contest->announcement)
+            </div>
         </div>
     </div>
 @endsection

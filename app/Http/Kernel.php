@@ -51,5 +51,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'admin' => \Judgement\Http\Middleware\AdminCheck::class,
         'contest' => \Judgement\Http\Middleware\ContestCheck::class,
+        'contestSubmission' => \Judgement\Http\Middleware\SubmitCheck::class,
     ];
 }

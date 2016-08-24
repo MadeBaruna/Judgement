@@ -95,3 +95,7 @@
 .countdown {
     float: right;
 }
+
+.submit_source button {
+    line-height: 1.2142em !important;
+}

@@ -17,8 +17,13 @@
                     </div>
 
                     @foreach($problems as $problem)
-                        <a href='{{ url('/contest/' . $contest->id) }}'
-                           class="item {{ $currentProblem == $problem->id ? 'active' : ''}}">
+                        <a href='{{ url('/contest/' . $contest->id . '/problem/' . $problem->id) }}'
+                           class="item
+                           <?php
+                           if (isset($currentProblem)) {
+                               echo $currentProblem->id == $problem->id ? 'active' : '';
+                           }
+                           ?>">
                             {{ $problem->name }}
                         </a>
                     @endforeach
@@ -34,8 +39,7 @@
                     </div>
                     @yield('contest_breadcrumb')
                 </div>
-                <div class="ui bottom attached segment">
-                    @yield('contest_content')
+                @yield('contest_content')
                 </div>
             </div>
 

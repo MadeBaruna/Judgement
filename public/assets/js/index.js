@@ -5,6 +5,8 @@ $(function () {
         action: 'hide'
     });
 
+    $('.ui.dropdown.submit_source').dropdown();
+
     $('.servertime').popup();
 
     $.get("/time", function (time) {

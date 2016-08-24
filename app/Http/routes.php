@@ -16,6 +16,7 @@ Route::get('/', 'IndexController@index')->name('index');;
 Route::auth();
 
 Route::get('contest/{id}', 'Contest\ContestController@index');
+Route::get('contest/{id}/problem/{contest}', 'Contest\ContestController@problem');
 
 //profile
 Route::get('profile', 'Profile\ProfileController@profile');

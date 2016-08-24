@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Judgement\Http\Requests;
 use Judgement\Http\Controllers\Controller;
 use Judgement\Contest;
+use DB;
 
 class ContestController extends Controller
 {
@@ -18,11 +19,28 @@ class ContestController extends Controller
     {
         $contest = Contest::findOrFail($id);
         $problems = $contest->problems;
-        $currentProblem = 0;
         return view('contest/announcement', [
             'contest' => $contest,
             'problems' => $problems,
-            'currentProblem' => $currentProblem
         ]);
+    }
+
+    public function problem($id, $problemId)
+    {
+        $contest = Contest::findOrFail($id);
+        $problem = $contest->problems()->findOrFail($problemId);
+        $problems = $contest->problems;
+        $languages = $contest->languages;
+        return view('contest/problem', [
+            'contest' => $contest,
+            'problems' => $problems,
+            'currentProblem' => $problem,
+            'languages' => $languages
+        ]);
+    }
+
+    public function submit($id, $problem)
+    {
+
     }
 }
