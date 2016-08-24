@@ -70,7 +70,7 @@ $time = Carbon\Carbon::now()->toTimeString();
 <script src="/assets/js/semantic.min.js"></script>
 <script src="/assets/js/moment-with-locales.js"></script>
 <script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=AM_HTMLorMML"></script>
-<script src="/assets/js/countdown.min.js"></script>
+<script src="/assets/js/jquery.countdown.min.js"></script>
 <script src="/assets/js/index.js"></script>
 <script src="/assets/js/profile.js"></script>
 <script src="/assets/js/admin.js"></script>

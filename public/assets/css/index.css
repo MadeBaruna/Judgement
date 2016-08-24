@@ -87,3 +87,11 @@
 .markdown-body table.rules td {
     width: 130px;
 }
+
+.problem_list h4.header {
+    margin: 0 !important;
+}
+
+.countdown {
+    float: right;
+}
