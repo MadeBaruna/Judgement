@@ -30,6 +30,7 @@ $time = Carbon\Carbon::now()->toTimeString();
                 <a href="{{ url('/login') }}" class="item">@lang('header.login')</a>
                 <a href="{{ url('/register') }}" class="item">@lang('header.register')</a>
             @else
+                @yield('user_menu')
                 <div class="ui dropdown link item">
                     <span class="text">
                         <img class="ui avatar image" src="{{ Auth::user()->picture() }}">

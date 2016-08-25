@@ -7,6 +7,8 @@ use Judgement\Http\Requests;
 use Judgement\Http\Controllers\Controller;
 use Judgement\Contest;
 use DB;
+use Judgement\Language;
+use Judgement\Submission;
 
 class ContestController extends Controller
 {
@@ -37,10 +39,5 @@ class ContestController extends Controller
             'currentProblem' => $problem,
             'languages' => $languages
         ]);
-    }
-
-    public function submit($id, $problem)
-    {
-
     }
 }

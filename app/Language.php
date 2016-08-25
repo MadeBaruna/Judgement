@@ -16,18 +16,8 @@ class Language extends Model
         return $this->belongsTo('Judgement\Contest');
     }
 
-    public static function compiler($lang)
+    public static function detail($id)
     {
-        return Language::where('name', $lang)->first()->compiler_path;
-    }
-
-    public static function executor($lang)
-    {
-        return Language::where('name', $lang)->first()->executor_path;
-    }
-
-    public static function ext($lang)
-    {
-        return '.' . Language::where('name', $lang)->first()->compiled_ext;
+        return static::find($id);
     }
 }

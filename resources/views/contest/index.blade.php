@@ -1,5 +1,22 @@
 @extends('layouts.index')
 
+@section('user_menu')
+    @if (!(Auth::user()->isAdmin()))
+        <a class="item">
+            <i class="inbox icon"></i>
+            Submission
+        </a>
+    @endif
+    <a class="item">
+        <i class="mail icon"></i>
+        Confirmation
+    </a>
+    <a class="item">
+        <i class="list icon"></i>
+        Scoreboard
+    </a>
+@endsection
+
 @section('content')
     <div class="ui container">
         <div class="ui two column stackable grid">
@@ -40,9 +57,9 @@
                     @yield('contest_breadcrumb')
                 </div>
                 @yield('contest_content')
-                </div>
             </div>
-
         </div>
+
+    </div>
     </div>
 @endsection

@@ -50,7 +50,7 @@
     </div>
     <div class="ui bottom attached segment">
         <form class="ui form {{ count($errors->all()) > 0 ? 'error' : '' }}" method="POST"
-              action="{{ url('/contest/' . $contest->id . '/problems/' . $currentProblem->id . '/submit') }}"
+              action="{{ url('/contest/' . $contest->id . '/problem/' . $currentProblem->id . '/submit') }}"
               enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="three fields">

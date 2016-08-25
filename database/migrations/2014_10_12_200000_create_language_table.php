@@ -17,7 +17,9 @@ class CreateLanguageTable extends Migration
             $table->string('name');
             $table->string('compiler_path');
             $table->string('executor_path');
-            $table->string('compiled_ext');
+            $table->string('compiled_name');
+            $table->boolean('cg')->nullable();
+            $table->integer('threads_num')->nullable();
         });
     }
 

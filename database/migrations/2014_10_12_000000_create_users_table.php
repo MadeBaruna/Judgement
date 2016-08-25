@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('type')->default('user');
             $table->string('institution')->default('-');
+            $table->integer('current_group_id')->unsigned();
             $table->rememberToken();
             $table->timestamps();
         });
