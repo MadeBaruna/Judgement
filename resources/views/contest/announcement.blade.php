@@ -1,4 +1,4 @@
-@extends('contest.index')
+@extends('contest.problemview')
 
 @section('title', $contest->name)
 

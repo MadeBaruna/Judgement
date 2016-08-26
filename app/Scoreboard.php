@@ -43,4 +43,45 @@ class Scoreboard extends Model
 
         $score->save();
     }
+
+    public static function getScores(Contest $contest)
+    {
+        $type = $contest->type == 'individual' ? 'user_id' : 'group_id';
+
+        $scoreId = [];
+        $scoreTotal = [];
+        $scoreProblem = [];
+        $scorePenalty = [];
+        $scoreProblemPenalty = [];
+
+        $users = $contest->users;
+
+        foreach ($users as $i => $user) {
+            $scoreboards = static::where($type, '=', $user->id)->get();
+            $key = $i;
+
+            if (!isset($scoreTotal[$key])) $scoreTotal[$key] = 0;
+            if (!isset($scorePenalty[$key])) $scorePenalty[$key] = 0;
+            if (!isset($scoreProblem[$key])) $scoreProblem[$key] = [];
+            if (!isset($scoreProblemPenalty[$key])) $scoreProblemPenalty[$key] = [];
+
+            array_push($scoreId, $user->id);
+            foreach ($scoreboards as $scoreboard) {
+                $scoreTotal[$key] += $scoreboard->accepted;
+                $scorePenalty[$key] += $scoreboard->time_penalty;
+                array_push($scoreProblem[$key], $scoreboard->accepted);
+                array_push($scoreProblemPenalty[$key], $scoreboard->time_penalty);
+            }
+        }
+
+        array_multisort(
+            $scoreTotal, SORT_DESC,
+            $scorePenalty, SORT_ASC,
+            $scoreId,
+            $scoreProblem,
+            $scoreProblemPenalty
+        );
+
+        return [$scoreId, $scoreTotal, $scorePenalty, $scoreProblem, $scoreProblemPenalty];
+    }
 }

@@ -99,3 +99,12 @@
 .submit_source button {
     line-height: 1.2142em !important;
 }
+
+table.scoreboard strong {
+    font-size: 1.2em;
+}
+
+table.scoreboard td.score {
+    width: 75px !important;
+    max-width: 150px !important;
+}

@@ -8,6 +8,7 @@ use Judgement\Http\Controllers\Controller;
 use Judgement\Contest;
 use DB;
 use Judgement\Language;
+use Judgement\Scoreboard;
 use Judgement\Submission;
 
 class ContestController extends Controller
@@ -38,6 +39,24 @@ class ContestController extends Controller
             'problems' => $problems,
             'currentProblem' => $problem,
             'languages' => $languages
+        ]);
+    }
+
+    public function scoreboard($id)
+    {
+        $contest = Contest::findOrFail($id);
+        list($scoreId, $scoreTotal, $scorePenalty, $scoreProblem, $scoreProblemPenalty) = Scoreboard::getScores($contest);
+        $type = $contest->type;
+        $problemCount = $contest->problems->count();
+        return view('contest/scoreboard', [
+            'contest' => $contest,
+            'type' => $type,
+            'problem_count' => $problemCount,
+            'score_id' => $scoreId,
+            'score_total' => $scoreTotal,
+            'score_penalty' => $scorePenalty,
+            'score_problem' => $scoreProblem,
+            'score_problem_penalty' => $scoreProblemPenalty
         ]);
     }
 }

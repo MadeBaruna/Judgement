@@ -16,6 +16,7 @@ Route::get('/', 'IndexController@index')->name('index');;
 Route::auth();
 
 Route::get('contest/{id}', 'Contest\ContestController@index');
+Route::get('contest/{id}/scoreboard', 'Contest\ContestController@scoreboard');
 Route::get('contest/{id}/problem/{contest}', 'Contest\ContestController@problem');
 Route::post('contest/{id}/problem/{contest}/submit', 'Contest\SubmissionController@submitPost');
 
