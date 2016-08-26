@@ -65,14 +65,12 @@ class SubmissionController extends Controller
 
                 $request->file('input_file')->move($destinationPath, $fileName);
 
-//                $submission->judge();
+                $submission->judge();
 
                 return redirect()->back();
             } else {
                 return redirect()->back()->withErrors(['File Error']);
             }
         }
-
-
     }
 }

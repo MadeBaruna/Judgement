@@ -49,6 +49,12 @@ class Submission extends Model
             $this->score = $judge['score'];
             $this->save();
             return 1;
+        } else {
+            $this->status = 'AC';
+            $this->score = $judge['score'];
+            $this->save();
+            Scoreboard::updateScore($this);
+            return 0;
         }
     }
 
@@ -143,13 +149,15 @@ class Submission extends Model
         $result['status'] = null;
         $result['right_answer'] = 0;
         $result['score'] = 0;
-        dump($testcases->count());
         foreach ($testcases as $testcase) {
             $inputFile['path'] = $testcase->in();
             $inputFile['id'] = $testcase->id;
 
             $run = $this->run($inputFile);
-            if ($run != null) return $run;
+            if ($run != null) {
+                $result['status'] = $run;
+                return $result;
+            }
 
             $answer = fopen($testcase->out(), 'r');
             $output = fopen($this->getPathWithStorage() . 'output.txt', 'r');

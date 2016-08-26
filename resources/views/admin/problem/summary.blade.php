@@ -43,7 +43,7 @@
                 <tr>
                     <td>Memory Limit</td>
                     <td>{{ $problem->memory_limit == 0 ? 'No Limit' :
-                    ($problem->memory_limit >= 10000 ? $problem->memory_limit/10000 . ' MB' :
+                    ($problem->memory_limit >= 1000 ? $problem->memory_limit/1000 . ' MB' :
                     $problem->memory_limit . ' KB') }}
                     </td>
                 </tr>

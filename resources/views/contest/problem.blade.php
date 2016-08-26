@@ -38,7 +38,7 @@
                 <div class="ui grey image large label">
                     Memory Limit
                     <div class="detail">{{ $currentProblem->memory_limit == 0 ? 'No Limit' :
-                    ($currentProblem->memory_limit >= 10000 ? $currentProblem->memory_limit/10000 . ' MB' :
+                    ($currentProblem->memory_limit >= 1000 ? $currentProblem->memory_limit/1000 . ' MB' :
                     $currentProblem->memory_limit . ' KB') }}</div>
                 </div>
                 @markdown($currentProblem->statement)
