@@ -65,4 +65,4 @@ Route::post('admin/problem/{id}/testcases', 'Admin\AdminTestcase@newTestcasePost
 
 Route::get('time', 'Time@getCurrentTime');
 
-Route::get('test', 'CompileController@compile');
+Route::get('test/{id}', 'CompileController@compile');

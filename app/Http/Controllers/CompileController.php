@@ -6,8 +6,8 @@ use Judgement\Submission;
 
 class CompileController extends Controller
 {
-    public function compile()
+    public function compile($id)
     {
-        Submission::find(1)->first()->run();
+        Submission::find($id)->judge();
     }
 }

@@ -4,6 +4,7 @@ namespace Judgement;
 
 use Illuminate\Database\Eloquent\Model;
 use Judgement\Judgement;
+use Auth;
 
 class Submission extends Model
 {
@@ -35,17 +36,20 @@ class Submission extends Model
     public function judge()
     {
         $compile = $this->compile();
-
         if ($compile != 0) {
             $this->status = 'Compile Error';
             $this->save();
-            return $compile;
+            return 1;
         }
 
-        $this->status = 'Compiled';
-        $this->save();
-
-        $this->run();
+        $judge = $this->grade();
+        dump($judge);
+        if ($judge['status'] != null) {
+            $this->status = $judge['status'];
+            $this->score = $judge['score'];
+            $this->save();
+            return 1;
+        }
     }
 
     function compile()
@@ -64,17 +68,61 @@ class Submission extends Model
         return $status;
     }
 
-    public function run()
+    public function run($in)
     {
-        if (!is_dir('/tmp/box/0/box')) {
-            echo 'creating isolate dir';
-            exec('isolate --cg --init');
+        $userId = 1;
+
+        if (!is_dir('/tmp/box/' . $userId . '/box')) {
+            exec('isolate --cg -b' . $userId . ' --init');
         }
 
-        if (!is_writable('/tmp/box/0/box')) {
-            echo 'cleaning up isolate dir';
-            exec('isolate --cg --init');
+        if (!is_writable('/tmp/box/' . $userId . '/box')) {
+            exec('isolate --cg -b' . $userId . ' --init');
         }
+
+        $language = Language::detail($this->language_id);
+
+        $fileNameNoExt = pathinfo($this->filename)['filename'];
+        $fileName = str_replace('%filename', $fileNameNoExt, $language->compiled_name);
+
+        $isolatePath = '/tmp/box/' . $userId . '/box/' . $this->getPath();
+
+        $problem = Problem::find($this->problem_id)->first();
+        $executor = str_replace(
+            ['%filename', '%isolatePath', '%mem'],
+            [$fileNameNoExt, $this->getPath(), $problem->memory_limit],
+            $language->executor_path);
+
+        copy($in['path'], $isolatePath . $in['id'] . '.in');
+
+        $cgEnabled = $language->cg == 1 ? true : false;
+        $builder =
+            'isolate' .
+            ($cgEnabled ? ' --cg' : '') .
+            ' -b' . $userId .
+            ' --processes=' . ($language->threads_num > 1 ? $language->threads_num : 1) .
+            ($problem->time_limit > 0 ? ' --wall-time=' . $problem->time_limit : '') .
+            ($problem->memory_limit > 0 && !$cgEnabled ? ' --mem=' . $problem->memory_limit : '') .
+            ($problem->memory_limit > 0 && $cgEnabled ? ' --cg-mem=' . $problem->memory_limit : '') .
+            ' --stdin=' . $this->getPath() . $in['id'] . '.in' .
+            ' --meta=' . $this->getPathWithStorage() . 'detail.txt' .
+            ' --stdout=' . $this->getPath() . 'output.txt' .
+            ' --run -- ' . $executor . ' 2>&1';
+
+        exec($builder, $output, $status);
+
+        $status = $this->getDetail($this->getPathWithStorage() . 'detail.txt', 'status');
+
+        if ($status == null) {
+            copy($isolatePath . 'output.txt', $this->getPathWithStorage() . 'output.txt');
+        }
+
+        return $status;
+    }
+
+    public function grade()
+    {
+        $userId = 1;
 
         $language = Language::detail($this->language_id);
 
@@ -83,34 +131,48 @@ class Submission extends Model
 
         $compiled = $this->getPathWithStorage() . $fileName;
 
-        $isolatePath = '/tmp/box/0/box/' . $this->getPath();
+        $isolatePath = '/tmp/box/' . $userId . '/box/' . $this->getPath();
 
         if (!is_dir($isolatePath)) {
             mkdir($isolatePath, 0777, true);
         }
 
-        rename($compiled, '/tmp/box/0/box/' . $this->getPath() . $fileName);
+        rename($compiled, $isolatePath . $fileName);
 
-        $problem = Problem::find($this->problem_id)->first();
-        $executor = str_replace(
-            ['%filename', '%isolatePath', '%mem'],
-            [$fileNameNoExt, $this->getPath(), $problem->memory_limit],
-            $language->executor_path);
+        $testcases = $this->problem->testcases;
+        $result['status'] = null;
+        $result['right_answer'] = 0;
+        $result['score'] = 0;
+        dump($testcases->count());
+        foreach ($testcases as $testcase) {
+            $inputFile['path'] = $testcase->in();
+            $inputFile['id'] = $testcase->id;
 
-        $cgEnabled = $language->cg == 1 ? true : false;
-        $builder =
-            'isolate' .
-            ($cgEnabled ? ' --cg' : '') .
-            ' --processes=' . ($language->threads_num > 1 ? $language->threads_num : 1) .
-            ($problem->time_limit > 0 ? ' --wall-time=' . $problem->time_limit : '') .
-            ($problem->memory_limit > 0 && !$cgEnabled ? ' --mem=' . $problem->memory_limit : '') .
-            ($problem->memory_limit > 0 && $cgEnabled ? ' --cg-mem=' . $problem->memory_limit : '') .
-            ' --meta=' . $isolatePath . 'detail.txt' .
-            ' --stdout=' . $this->getPath() . 'output.txt' .
-            ' --run -- ' . $executor . ' 2>&1';
+            $run = $this->run($inputFile);
+            if ($run != null) return $run;
 
-        exec($builder, $output, $status);
-        return $status;
+            $answer = fopen($testcase->out(), 'r');
+            $output = fopen($this->getPathWithStorage() . 'output.txt', 'r');
+
+            $result['status'] = null;
+            while (!feof($answer)) {
+                $lineA = fgets($answer);
+                $lineO = fgets($output);
+                if ($lineA !== $lineO) {
+                    $result['status'] = 'WA';
+                    break;
+                }
+            }
+
+            fclose($answer);
+            fclose($output);
+
+            if ($result['status'] != null) return $result;
+            $result['right_answer']++;
+            $result['score'] = $result['right_answer'] / $testcases->count() * 100;
+        }
+
+        return $result;
     }
 
     public function getPathWithStorage()
@@ -128,5 +190,16 @@ class Submission extends Model
             '/' . $this->id .
             '/';
         return $source;
+    }
+
+    public function getDetail($file, $name)
+    {
+        $lines = file($file);
+        foreach ($lines as $line) {
+            if (strpos($line, $name) !== false) {
+                $value = explode(':', $line);
+                return $value[1];
+            }
+        }
     }
 }
