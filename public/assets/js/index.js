@@ -1,6 +1,8 @@
 var _t;
 
 $(function () {
+    hljs.initHighlightingOnLoad();
+
     $('.ui.dropdown').dropdown({
         action: 'hide'
     });
@@ -54,9 +56,13 @@ $(function () {
                 $(this).html(event.strftime(format));
             })
             .on('finish.countdown', function (event) {
-                $(this).html('STARTED');
+                $(this).html('ENDED');
             });
     }
+
+    $('.submit_problem').click(function () {
+        $('.submit_loading').addClass('active');
+    });
 });
 
 function updateTime() {

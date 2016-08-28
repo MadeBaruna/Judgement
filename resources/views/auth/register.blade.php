@@ -52,7 +52,7 @@
 
             <div class="ui buttons fluid">
                 <button class="ui button login">Login</button>
-                <button class="ui button">Forgot Password</button>
+                <button class="ui button forgot">Forgot Password</button>
             </div>
         </div>
     </div>

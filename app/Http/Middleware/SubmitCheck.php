@@ -26,8 +26,7 @@ class SubmitCheck
         if ($contest->status == 'Ended') {
             $endTime = Carbon::parse($contest->end_time)->diffForHumans();
             $error = [
-                'title' => 'Contest Has Ended',
-                'description' => 'The contest ' . $contest->name . ' has ended ' . $endTime
+                'description' => 'The contest has ended ' . $endTime
             ];
             return redirect()->back()->withErrors($error);
         }

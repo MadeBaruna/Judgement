@@ -70,7 +70,7 @@ class ContestCheck
 
         //TODO: category check
 
-        $user->contests()->sync([$contestId]);
+        $user->contests()->sync([$contestId], false);
 
         return $next($request);
     }

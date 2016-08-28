@@ -2,7 +2,7 @@
 
 @section('title', 'Scoreboard')
 
-@section('active_submission', 'active')
+@section('active_submissions', 'active')
 
 @section('content')
     <div class="ui container">

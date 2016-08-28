@@ -14,6 +14,7 @@ $time = Carbon\Carbon::now()->toTimeString();
 
     <link rel="stylesheet" type="text/css" href="/assets/css/semantic.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/github-markdown.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/github.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/index.css">
 </head>
 <body>
@@ -72,6 +73,7 @@ $time = Carbon\Carbon::now()->toTimeString();
 <script src="/assets/js/moment-with-locales.js"></script>
 <script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=AM_HTMLorMML"></script>
 <script src="/assets/js/jquery.countdown.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
 <script src="/assets/js/index.js"></script>
 <script src="/assets/js/profile.js"></script>
 <script src="/assets/js/admin.js"></script>

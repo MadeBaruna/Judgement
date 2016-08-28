@@ -49,6 +49,9 @@
         <h3>Submit Answer</h3>
     </div>
     <div class="ui bottom attached segment">
+        <div class="ui inverted dimmer submit_loading">
+            <div class="ui indeterminate small text loader">Judging...</div>
+        </div>
         <form class="ui form {{ count($errors->all()) > 0 ? 'error' : '' }}" method="POST"
               action="{{ url('/contest/' . $contest->id . '/problem/' . $currentProblem->id . '/submit') }}"
               enctype="multipart/form-data">
@@ -79,7 +82,7 @@
                     </div>
                 </div>
                 <div class="three wide field submit_source">
-                    <button class="ui green labeled icon fluid button" type="submit">
+                    <button class="ui green labeled icon fluid button submit_problem" type="submit">
                         <i class="upload icon"></i>
                         Submit
                     </button>

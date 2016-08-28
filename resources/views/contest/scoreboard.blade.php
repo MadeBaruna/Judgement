@@ -71,9 +71,10 @@
                         </td>
                         @for($i=0; $i < $problem_count; $i++)
                             @if(isset($score_problem[$key][$i]))
-                                <td class="center aligned score {{ $score_problem[$key][$i] == 1 ? 'positive' : ($score_problem[$key][$i] == 0 ? 'negative' : '')}}">
+                                <td class="center aligned score {{ $score_problem[$key][$i] >= 1 && $score_problem_penalty[$key][$i] > 0 ? 'positive' :
+                                                                  ($score_problem[$key][$i] >= 1 && $score_problem_penalty[$key][$i] == 0 ? 'negative' : '')}}">
                                     <strong>{{ $score_problem[$key][$i] }}<br/></strong>
-                                    {{ $score_problem_penalty[$key][$i] }}
+                                    {{ $score_problem_penalty[$key][$i] == 0 ? '-' :  $score_problem_penalty[$key][$i]}}
                                 </td>
                             @else
                                 <td class="center aligned score">

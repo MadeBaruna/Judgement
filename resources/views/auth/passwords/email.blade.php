@@ -1,47 +1,50 @@
-@extends('layouts.app')
+@extends('auth.auth')
+
+@section('title', 'Reset Password')
 
 <!-- Main Content -->
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Reset Password</div>
-                <div class="panel-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+    @extends('auth.auth')
 
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/password/email') }}">
-                        {{ csrf_field() }}
+@section('title', 'Login')
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}">
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fa fa-btn fa-envelope"></i> Send Password Reset Link
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+@section('content')
+    <div class="ui middle aligned center aligned grid">
+        <div class="column">
+            <h2 class="ui header">
+                <div class="content">
+                    Reset Password
                 </div>
+            </h2>
+            <form class="ui large form {{ (session('status')) ? 'success' : ''}} {{ count($errors->all()) > 0 ? 'error' : '' }}"
+                  method="POST" action="{{ url('/password/email') }}">
+                <div class="ui success message">
+                    {{ session('status') }}
+                </div>
+                {{ csrf_field() }}
+                <div class="ui segment">
+                    <div class="field {{ $errors->has('email') ? 'error' : '' }}">
+                        <div class="ui left icon input">
+                            <i class="user icon"></i>
+                            <input type="email" name="email" placeholder="E-mail address" value="{{ old('email') }}">
+                        </div>
+                    </div>
+                    <button type="submit" class="ui fluid large primary submit button">Send Password Reset Link</button>
+                </div>
+
+                <div class="ui error message">
+                    <ul class="list">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            </form>
+
+            <div class="ui buttons fluid">
+                <button class="ui button login">Login</button>
+                <button class="ui button register">Register</button>
             </div>
         </div>
     </div>
-</div>
 @endsection

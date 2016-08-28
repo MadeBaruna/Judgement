@@ -5,13 +5,13 @@
         <i class="cube icon"></i>
         Problems
     </a>
-    <a class="item">
+    <a href="{{ url('/contest/' . $contest->id) . '/submissions'}}" class="item @yield('active_submissions')">
         <i class="inbox icon"></i>
-        Submission
+        Submissions
     </a>
     <a class="item">
         <i class="mail icon"></i>
-        Confirmation
+        Clarifications
     </a>
     <a href="{{ url('/contest/' . $contest->id . '/scoreboard') }}" class="item @yield('active_scoreboard')">
         <i class="list icon"></i>
