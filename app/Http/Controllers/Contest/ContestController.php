@@ -8,8 +8,10 @@ use Judgement\Http\Controllers\Controller;
 use Judgement\Contest;
 use DB;
 use Judgement\Language;
+use Judgement\Problem;
 use Judgement\Scoreboard;
 use Judgement\Submission;
+use Auth;
 
 class ContestController extends Controller
 {
@@ -57,6 +59,47 @@ class ContestController extends Controller
             'score_penalty' => $scorePenalty,
             'score_problem' => $scoreProblem,
             'score_problem_penalty' => $scoreProblemPenalty
+        ]);
+    }
+
+    public function submissions($id)
+    {
+        $contest = Contest::findOrFail($id);
+        $user = Auth::user();
+        $submissions = $user->submissions()->where('contest_id', '=', $id)->paginate(15);
+        $type = $contest->type;
+        return view('contest/submissions', [
+            'contest' => $contest,
+            'submissions' => $submissions
+        ]);
+    }
+
+    public function submissionView($id, $sub)
+    {
+        $contest = Contest::findOrFail($id);
+        $submission = Submission::find($sub);
+        $user = Auth::user();
+        if ($submission->user_id != $user->id) {
+            return redirect('/contest/' . $id . '/submissions');
+        }
+
+        $problem = Problem::find($submission->problem_id);
+        $language = Language::find($submission->language_id);
+
+        $source = storage_path(
+            'contest/' . $id .
+            '/problem/' . $problem->id .
+            '/' . $user->id .
+            '/' . $submission->id .
+            '/' . $submission->filename);
+        $code = file_get_contents($source);
+
+        return view('contest/submission', [
+            'contest' => $contest,
+            'problem' => $problem,
+            'submission' => $submission,
+            'language' => $language,
+            'code' => $code
         ]);
     }
 }
