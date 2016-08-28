@@ -91,7 +91,13 @@
                             </a>
                         </td>
                     @else
-                        <td></td>
+                        <td class="collapsing">
+                            <a href="{{ url('admin/scoreboard/' . $contest->id) }}"
+                               class="ui labeled icon {{ $contest->status == 'Not Started' ? 'teal' : 'primary' }} fluid button">
+                                <i class="sign in icon"></i>
+                                <label>Enter</label>
+                            </a>
+                        </td>
                     @endif
                 </tr>
             @endforeach

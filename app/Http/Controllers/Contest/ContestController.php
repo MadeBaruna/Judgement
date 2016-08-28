@@ -66,7 +66,7 @@ class ContestController extends Controller
     {
         $contest = Contest::findOrFail($id);
         $user = Auth::user();
-        $submissions = $user->submissions()->where('contest_id', '=', $id)->paginate(15);
+        $submissions = $user->submissions()->where('contest_id', '=', $id)->orderBy('id', 'DESC')->paginate(15);
         $type = $contest->type;
         return view('contest/submissions', [
             'contest' => $contest,

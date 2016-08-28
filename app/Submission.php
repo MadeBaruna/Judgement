@@ -37,15 +37,14 @@ class Submission extends Model
     {
         $compile = $this->compile();
         if ($compile != 0) {
-            $this->status = 'Compile Error';
+            $this->status = 'CE';
             $this->save();
             return 1;
         }
 
         $judge = $this->grade();
-        dump($judge);
         if ($judge['status'] != null) {
-            $this->status = $judge['status'];
+            $this->status = trim($judge['status']);
             $this->score = $judge['score'];
             $this->save();
             return 1;
@@ -62,7 +61,7 @@ class Submission extends Model
     {
         $language = Language::detail($this->language_id);
 
-        $source = $this->getPathWithStorage() . $this->filename;
+        $source = $this->getPathWithStorage() . escapeshellarg($this->filename);
 
         $fileNameNoExt = pathinfo($this->filename)['filename'];
 
@@ -76,13 +75,14 @@ class Submission extends Model
 
     public function run($in)
     {
-        $userId = 1;
+        $userId = $this->user_id;
 
         if (!is_dir('/tmp/box/' . $userId . '/box')) {
             exec('isolate --cg -b' . $userId . ' --init');
         }
 
         if (!is_writable('/tmp/box/' . $userId . '/box')) {
+            exec('isolate --cg -b' . $userId . ' --cleanup');
             exec('isolate --cg -b' . $userId . ' --init');
         }
 
@@ -116,6 +116,7 @@ class Submission extends Model
             ' --run -- ' . $executor . ' 2>&1';
 
         exec($builder, $output, $status);
+        dd($builder, $output, $status);
 
         $status = $this->getDetail($this->getPathWithStorage() . 'detail.txt', 'status');
 
@@ -128,7 +129,7 @@ class Submission extends Model
 
     public function grade()
     {
-        $userId = 1;
+        $userId = Auth::user()->id;
 
         $language = Language::detail($this->language_id);
 
@@ -191,7 +192,7 @@ class Submission extends Model
 
     public function getPath()
     {
-        $typeId = $this->type == 'individual' ? $this->user_id : $this->group_id;
+        $typeId = $this->user_id;
         $source = 'contest/' . $this->contest_id .
             '/problem/' . $this->problem_id .
             '/' . $typeId .

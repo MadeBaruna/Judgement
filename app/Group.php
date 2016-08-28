@@ -15,4 +15,13 @@ class Group extends Model
     {
         return $this->belongsTo('Judgement\User', 'leader_id');
     }
+
+    public function picture()
+    {
+        if (file_exists(public_path('/profiles/pictures/groups') . $this->id . '.png')) {
+            return '/profiles/pictures/groups/' . $this->id . '.png';
+        } else {
+            return '/assets/images/default.png';
+        }
+    }
 }

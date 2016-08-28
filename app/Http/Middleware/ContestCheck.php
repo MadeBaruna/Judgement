@@ -35,8 +35,8 @@ class ContestCheck
 
         $user = Auth::user();
 
-        $userGroups = $user->groups;
-        if ($contestType == 'group' && count($userGroups) == 0) {
+        $userGroupId = $user->current_group_id;
+        if ($contestType == 'group' && $userGroupId == 0) {
             $error = [
                 'title' => 'Group Contest',
                 'description' => 'You need a group to join contest ' . $contest->name
@@ -46,19 +46,18 @@ class ContestCheck
 
         $allowedUsers = $contest->allowedUsers;
         if ($allowedUsers->count() > 0) {
-            if($contestType == 'group') {
-                foreach ($userGroups as $userGroup) {
-                    $leaderEmail = $userGroup->leader->email;
-                    if(!$allowedUsers->contains('email', $leaderEmail)) {
-                        $error = [
-                            'title' => 'Access Forbidden',
-                            'description' => 'You cannot access the contest'
-                        ];
-                        return redirect()->route('index')->withErrors($error);
-                    }
+            if ($contestType == 'group') {
+                $userGroup = Group::find($userGroupId);
+                $leaderEmail = $userGroup->leader->email;
+                if (!$allowedUsers->contains('email', $leaderEmail)) {
+                    $error = [
+                        'title' => 'Access Forbidden',
+                        'description' => 'You cannot access the contest'
+                    ];
+                    return redirect()->route('index')->withErrors($error);
                 }
             } else {
-                if(!$allowedUsers->contains('email', $user->email)) {
+                if (!$allowedUsers->contains('email', $user->email)) {
                     $error = [
                         'title' => 'Access Forbidden',
                         'description' => 'You cannot access the contest'

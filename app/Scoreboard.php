@@ -58,9 +58,19 @@ class Scoreboard extends Model
         $scorePenalty = [];
         $scoreProblemPenalty = [];
 
-        $users = $contest->users;
+        if ($type == 'user_id') {
+            $submitter = $contest->users;
+        } else {
+            foreach ($contest->users as $user) {
+                $submitter = [];
+                $group = Group::find($user->current_group_id);
+                if (!in_array($group, $submitter)) {
+                    array_push($submitter, $group);
+                }
+            }
+        }
 
-        foreach ($users as $i => $user) {
+        foreach ($submitter as $i => $user) {
             $scoreboards = static::where($type, '=', $user->id)->get();
             $key = $i;
 

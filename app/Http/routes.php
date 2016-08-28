@@ -64,6 +64,8 @@ Route::get('admin/problem/{id}/testcases', 'Admin\AdminTestcase@testcases');
 Route::get('admin/problem/{id}/testcase/{testcase}', 'Admin\AdminTestcase@viewTestcase');
 Route::post('admin/problem/{id}/testcases/delete', 'Admin\AdminTestcase@deleteTestCasePost');
 Route::post('admin/problem/{id}/testcases', 'Admin\AdminTestcase@newTestcasePost');
+
+Route::get('admin/scoreboard/{id}', 'Admin\AdminScoreboard@scoreboard');
 //end admin dashboard
 
 Route::get('time', 'Time@getCurrentTime');
