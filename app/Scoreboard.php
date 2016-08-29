@@ -30,14 +30,16 @@ class Scoreboard extends Model
             'user_id' => $submission->user_id
         ]);
 
-        if ($submission->type == 'AC') {
+        if ($score->accepted == 1) {
             return;
         }
 
         $startTime = Carbon::parse(Contest::find($submission->contest_id)->start_time);
         $submittedTime = Carbon::parse($submission->submitted_at);
-        if ($submission->status != 'AC') {
-            $score->time_penalty += $submittedTime->diffInMinutes($startTime);
+        if ($submission->status == 'AC') {
+            $diff = $submittedTime->diffInMinutes($startTime);
+            $diff == 0 ?: 1;
+            $score->time_penalty += $diff;
         } else {
             $score->time_penalty = 0;
         }
@@ -82,7 +84,7 @@ class Scoreboard extends Model
             array_push($scoreId, $user->id);
             foreach ($scoreboards as $scoreboard) {
                 $scoreTotal[$key] += $scoreboard->accepted;
-                $scorePenalty[$key] += $scoreboard->time_penalty + $scoreboard->submission_count * 20;
+                $scorePenalty[$key] += $scoreboard->time_penalty + ($scoreboard->submission_count - 1) * 20;
                 array_push($scoreProblem[$key], $scoreboard->submission_count);
                 array_push($scoreProblemPenalty[$key], $scoreboard->time_penalty);
             }

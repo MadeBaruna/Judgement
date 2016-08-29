@@ -10,6 +10,7 @@ use DB;
 use Validator;
 use Judgement\Problem;
 use Judgement\Submission;
+use Judgement\Jobs\JudgeSubmission;
 use Auth;
 
 class SubmissionController extends Controller
@@ -52,7 +53,7 @@ class SubmissionController extends Controller
                     'group_id' => $groupId,
                     'user_id' => $user->id,
                     'language_id' => $language->first()->id,
-                    'status' => 'Submitted',
+                    'status' => 'Pending',
                     'filename' => $request->input_file->getClientOriginalName()
                 ]);
 
@@ -65,9 +66,9 @@ class SubmissionController extends Controller
 
                 $request->file('input_file')->move($destinationPath, $fileName);
 
-                $submission->judge();
+                dispatch(new JudgeSubmission($submission));
 
-                return redirect()->back();
+                return redirect('/contest/' . $id . '/submissions');
             } else {
                 return redirect()->back()->withErrors(['File Error']);
             }
