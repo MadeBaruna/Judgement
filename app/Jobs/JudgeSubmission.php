@@ -36,6 +36,7 @@ class JudgeSubmission extends Job implements ShouldQueue
             $this->submission->status = 'CE';
             $this->submission->save();
             echo 'Compile error' . PHP_EOL;
+            $sandbox->clean();
             Scoreboard::updateScore($this->submission);
             return;
         }

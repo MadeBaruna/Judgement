@@ -56,11 +56,11 @@ class Submission extends Model
         if ($language->cg) {
             $command['mem'] = 0;
             $command['cgmem'] = $problem->memory_limit;
-            $command['process'] = $language->threads_num;
+            $command['process'] = 0;
         } else {
             $command['mem'] = $problem->memory_limit;
             $command['cgmem'] = 0;
-            $command['process'] = 1;
+            $command['process'] = 0;
         }
 
         $status = $sandbox->run(
@@ -103,7 +103,7 @@ class Submission extends Model
         } else {
             $command['mem'] = $problem->memory_limit;
             $command['cgmem'] = 0;
-            $command['process'] = 1;
+            $command['process'] = $language->threads_num;
         }
 
         $status = $sandbox->run(

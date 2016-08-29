@@ -41,10 +41,11 @@ class Sandbox extends Model
 
     public function run($cg, $mem, $cgmem, $time, $meta, $stdin, $stdout, $processes, $command)
     {
-        //isolate --cg -b [-m] [-t] [-M] [-i] [-o] [-p] --run --
+        //isolate --cg -b --full-env [-m] [-t] [-M] [-i] [-o] [-p] --run --
         $command =
             'isolate' .
             ' -b' . $this->id .
+            ' --full-env' .
             ($cg ? ' --cg' : '') .
             ($mem ? ' -m' . $mem : '') .
             ($cgmem ? ' --cg-mem=' . $cgmem : '') .
@@ -52,13 +53,12 @@ class Sandbox extends Model
             ($meta ? ' -M' . $meta : '') .
             ($stdin ? ' -i' . $stdin : '') .
             ($stdout ? ' -o' . $stdout : '') .
-            ($processes ? ' -p' . $processes : '') .
+            ($processes ? ' -p' . $processes : ' -p') .
             ' --run' .
             ' -- ' . $command .
             ' 2>&1';
 
         exec($command, $output, $status);
-        dump($command, $output, $status);
         return $status;
     }
 

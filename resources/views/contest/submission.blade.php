@@ -79,6 +79,9 @@
                         <?php
                         $verdict = $submission->status;
                         switch ($verdict) {
+                            case 'Pending':
+                                echo '<span class="ui grey label">Pending</span>';
+                                break;
                             case 'AC':
                                 echo '<span class="ui green label">Accepted</span>';
                                 break;
