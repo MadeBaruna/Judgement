@@ -13,25 +13,26 @@
         <h1>Your Groups</h1>
         @foreach($groups as $group)
             @php($members = $group->members)
-            <div class="ui divided selection list">
-                <div class="item">
-                    <img class="ui avatar image" src="{{ Auth::user()->picture() }}">
-                    <div class="content">
-                        <div class="header">{{ $group->name }}</div>
-                        <div class="description">{{ count($members) }} Members</div>
-                        <div class="ui horizontal middle aligned list">
-                            @foreach($members as $member)
-                                <div class="item">
-                                    <img class="ui avatar image" src="{{ Auth::user()->picture() }}">
-                                    <div class="content">
-                                        <div class="header">{{ $member->name }}</div>
-                                    </div>
-                                </div>
-                            @endforeach
+            <div class="ui top attached clearing segment">
+                <img class="ui avatar image" src="{{ $group->picture() }}"/> {{ $group->name }}
+                <a class="ui right floated compact small button">Edit</a>
+            </div>
+            <div class="ui secondary bottom attached segment">
+                <div class="ui horizontal list">
+                    @foreach($members as $member)
+                        <div class="item">
+                            <img class="ui avatar image" src="{{ $member->picture() }}">
+                            <div class="content">
+                                {{ $member->name }}
+                            </div>
                         </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         @endforeach
+
+        @if(count($groups) == 0)
+            <p>You have no group.</p>
+        @endif
     </div>
 @endsection
