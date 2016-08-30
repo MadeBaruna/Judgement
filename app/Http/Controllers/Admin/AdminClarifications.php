@@ -21,7 +21,10 @@ class AdminClarifications extends Controller
     {
         $contest = Contest::findOrFail($id);
         $allproblems = $contest->problems;
-        $clarifications = $contest->clarifications()->orderBy('id', 'DESC')->paginate(15);
+        $clarifications = $contest->clarifications()
+            ->orderBy('is_answered', 'ASC')
+            ->orderBy('id', 'DESC')
+            ->paginate(15);
         return view('admin/clarifications', [
             'contest' => $contest,
             'clarifications' => $clarifications,

@@ -15,7 +15,7 @@ $(function () {
             onApprove: function () {
                 confirm(1);
             }
-        }).modal('attach events', '.profile .image', 'show');
+        }).modal('attach events', '.profile .image.profile_picture', 'show');
     }
 
     $('input:text, .ui.button').click(function (e) {

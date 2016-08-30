@@ -112,7 +112,7 @@
         </table>
 
             @if($type == 'admin')
-                <h1>Grader Workers</h1>
+                <h1>Sandbox Status</h1>
                 <table class="ui celled table">
                     @php($counter=0)
                     @foreach(Judgement\Sandbox::all() as $sandbox)
