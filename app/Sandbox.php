@@ -12,10 +12,11 @@ class Sandbox extends Model
         'is_available'
     ];
 
-    public static function getAvailableSandbox()
+    public static function getAvailableSandbox($submission)
     {
         $sandbox = static::where('is_available', '=', 1)->first();
         $sandbox->is_available = 0;
+        $sandbox->submission_id = $submission->id;
         $sandbox->save();
         return $sandbox;
     }
@@ -75,6 +76,7 @@ class Sandbox extends Model
         exec($command, $output, $status);
 
         $this->is_available = 1;
+        $this->submission_id = null;
         $this->save();
         return $status;
     }

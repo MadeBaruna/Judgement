@@ -25,7 +25,7 @@ class JudgeSubmission extends Job implements ShouldQueue
     {
         echo 'Judging submission id: ' . $this->submission->id . PHP_EOL;
 
-        $sandbox = Sandbox::getAvailableSandbox();
+        $sandbox = Sandbox::getAvailableSandbox($this->submission);
         $sandbox->init();
         echo 'Initializing sandbox id: ' . $sandbox->id . PHP_EOL;
 

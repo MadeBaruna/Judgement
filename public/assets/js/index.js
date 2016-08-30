@@ -23,7 +23,8 @@ $(function () {
         displayAlign: "left",
         asciimath2jax: {
             delimiters: [['$$', '$$']]
-        }
+        },
+        messageStyle: "none"
     });
 
     $('.start_time_index').each(function () {

@@ -110,5 +110,27 @@
             @endif
             </tbody>
         </table>
+
+            @if($type == 'admin')
+                <h1>Grader Workers</h1>
+                <table class="ui celled table">
+                    @php($counter=0)
+                    @foreach(Judgement\Sandbox::all() as $sandbox)
+                        @if($counter%10==0)
+                            <tr>
+                                @endif
+                                @if($sandbox->is_available == 1)
+                                    <td class="center aligned positive collapsing">Idle</td>
+                                @else
+                                    <td class="center aligned negative collapsing">Working
+                                        #{{ $sandbox->submission_id }}</td>
+                                @endif
+                                @php($counter++)
+                                @if($counter%10==0)
+                            </tr>
+                        @endif
+                    @endforeach
+                </table>
+            @endif
     </div>
 @endsection

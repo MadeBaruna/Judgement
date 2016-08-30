@@ -15,6 +15,7 @@ class CreateSandboxTable extends Migration
         Schema::create('sandboxes', function (Blueprint $table) {
             $table->increments('id');
             $table->boolean('is_available');
+            $table->integer('submission_id')->unsigned()->nullable();
         });
     }
 
