@@ -64,6 +64,21 @@ $(function () {
     $('.submit_problem').click(function () {
         $('.submit_loading').addClass('active');
     });
+
+    var clarificationModal = $('.ui.modal.clarification_modal');
+
+    $('button.clarification').click(function () {
+        if (clarificationModal.length) {
+            $.get('/contest/' + $(this).data('contest') + '/clarification/' + $(this).data('clarification'),
+                function (data) {
+                    $('.clarification_title').text(data.title);
+                    $('.clarification_modal .problem').text(data.problem);
+                    $('.clarification_modal .question').text(data.question);
+                    $('.clarification_modal .answer').text(data.answer);
+                });
+            clarificationModal.modal('show');
+        }
+    });
 });
 
 function updateTime() {

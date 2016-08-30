@@ -16,6 +16,11 @@ Route::get('/', 'IndexController@index')->name('index');;
 Route::auth();
 
 Route::get('contest/{id}', 'Contest\ContestController@index');
+
+Route::get('contest/{id}/clarifications', 'Contest\ContestController@clarifications');
+Route::get('contest/{id}/clarification/{cla}', 'Contest\ContestController@clarificationView');
+Route::post('contest/{id}/clarifications/new', 'Contest\ContestController@newClarificationPost');
+
 Route::get('contest/{id}/scoreboard', 'Contest\ContestController@scoreboard');
 Route::get('contest/{id}/submissions', 'Contest\ContestController@submissions');
 Route::get('contest/{id}/submission/{sub}', 'Contest\ContestController@submissionView');
@@ -66,6 +71,8 @@ Route::post('admin/problem/{id}/testcases/delete', 'Admin\AdminTestcase@deleteTe
 Route::post('admin/problem/{id}/testcases', 'Admin\AdminTestcase@newTestcasePost');
 
 Route::get('admin/scoreboard/{id}', 'Admin\AdminScoreboard@scoreboard');
+Route::get('admin/clarifications/{id}', 'Admin\AdminClarifications@clarifications');
+Route::post('admin/clarifications/{id}/answer/{cla}', 'Admin\AdminClarifications@answer');
 //end admin dashboard
 
 Route::get('time', 'Time@getCurrentTime');

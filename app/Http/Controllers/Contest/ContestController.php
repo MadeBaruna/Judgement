@@ -3,6 +3,7 @@
 namespace Judgement\Http\Controllers\Contest;
 
 use Illuminate\Http\Request;
+use Judgement\Clarification;
 use Judgement\Http\Requests;
 use Judgement\Http\Controllers\Controller;
 use Judgement\Contest;
@@ -11,6 +12,7 @@ use Judgement\Language;
 use Judgement\Problem;
 use Judgement\Scoreboard;
 use Judgement\Submission;
+use Validator;
 use Auth;
 
 class ContestController extends Controller
@@ -100,6 +102,73 @@ class ContestController extends Controller
             'submission' => $submission,
             'language' => $language,
             'code' => $code
+        ]);
+    }
+
+    public function clarifications($id)
+    {
+        $contest = Contest::findOrFail($id);
+        $allproblems = $contest->problems;
+        $clarifications = $contest->clarifications()->orderBy('id', 'DESC')->paginate(15);
+        return view('contest/clarifications', [
+            'contest' => $contest,
+            'clarifications' => $clarifications,
+            'allproblems' => $allproblems,
+        ]);
+    }
+
+    public function newClarificationPost(Request $request, $id)
+    {
+        $contest = Contest::findOrFail($id);
+
+        $rules = [
+            'title' => 'required|max:255',
+            'problem' => 'required',
+            'question' => 'required',
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            $request->flash();
+            return redirect()->back()->withErrors($validator->errors());
+        }
+
+        if (!($contest->problems->contains($request->problem))) {
+            $request->flash();
+            $error = [
+                'title' => 'Problem not found',
+            ];
+            return redirect()->back()->withErrors($error);
+        }
+
+        Clarification::create([
+            'user_id' => Auth::user()->id,
+            'contest_id' => $contest->id,
+            'problem_id' => $request->problem,
+            'title' => $request->title,
+            'question' => $request->question,
+        ]);
+
+        return redirect()->back();
+    }
+
+    public function clarificationView($id, $cla)
+    {
+        $contest = Contest::findOrFail($id);
+        if ($contest->clarifications->contains($cla)) {
+            $clarification = Clarification::findOrFail($cla);
+        } else {
+            return response(404);
+        }
+
+        $problem = Problem::find($clarification->problem_id);
+
+        return response()->json([
+            'title' => $clarification->title,
+            'problem' => $problem->name,
+            'question' => $clarification->question,
+            'answer' => $clarification->is_answered ? $clarification->answer : 'Not answered yet'
         ]);
     }
 }

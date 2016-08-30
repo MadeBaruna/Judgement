@@ -43,6 +43,25 @@ $(function () {
             }).get().join()
         );
     });
+
+    var clarificationAdminModal = $('.ui.modal.clarification_admin_modal');
+
+    $('button.clarification').click(function () {
+        if (clarificationAdminModal.length) {
+            var contestId = $(this).data('contest');
+            var claId = $(this).data('clarification');
+            $.get('/contest/' + contestId + '/clarification/' + claId,
+                function (data) {
+                    $('.clarification_admin_modal form').attr('action', '/admin/clarifications/'
+                        + contestId + '/answer/' + claId);
+                    $('.clarification_title').text(data.title);
+                    $('.clarification_admin_modal .problem').text(data.problem);
+                    $('.clarification_admin_modal .question').text(data.question);
+                    $('.clarification_admin_modal .old_answer').text(data.answer);
+                });
+            clarificationAdminModal.modal('show');
+        }
+    });
 });
 
 function updateDateTime(type) {

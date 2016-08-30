@@ -57,6 +57,11 @@ class Contest extends Model
         return $this->belongsToMany('Judgement\Language');
     }
 
+    public function clarifications()
+    {
+        return $this->hasMany('Judgement\Clarification');
+    }
+
     public function allowedUsers()
     {
         return $this->hasMany('Judgement\AllowedUser');

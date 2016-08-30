@@ -14,7 +14,7 @@
             </div>
             <div class="ui breadcrumb">
                 <h1>
-                    Scoreboard
+                    Submission
                 </h1>
                 <div class="section">
                     <i class="home icon"></i>
@@ -100,8 +100,27 @@
                             </div>
                         </td>
                     </tr>
-                @endforeach
                 </tbody>
+                @endforeach
+                @if($submissions->total() != 0)
+                    <tfoot>
+                    <tr>
+                        <th colspan="7">
+                            <div class="ui right floated pagination menu">
+                                @include('layouts.pagination', ['page' => $submissions])
+                            </div>
+                        </th>
+                    </tr>
+                    </tfoot>
+                @else
+                    <tfoot>
+                    <tr>
+                        <th colspan="7">
+                            No submission yet
+                        </th>
+                    </tr>
+                    </tfoot>
+                @endif
             </table>
         </div>
     </div>

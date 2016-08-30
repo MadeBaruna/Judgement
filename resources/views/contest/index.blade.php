@@ -9,7 +9,7 @@
         <i class="inbox icon"></i>
         Submissions
     </a>
-    <a class="item">
+    <a href="{{ url('/contest/' . $contest->id . '/clarifications') }}" class="item @yield('active_clarifications')"">
         <i class="mail icon"></i>
         Clarifications
     </a>

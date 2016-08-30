@@ -49,6 +49,11 @@ class User extends Authenticatable
         return $this->hasMany('Judgement\Problem');
     }
 
+    public function clarifications()
+    {
+        return $this->hasMany('Judgement\Clarification');
+    }
+
     public function picture()
     {
         if (file_exists(public_path('/profiles/pictures/') . $this->id . '.png')) {
