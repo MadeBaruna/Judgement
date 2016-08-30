@@ -48,7 +48,7 @@ $time = Carbon\Carbon::now()->toTimeString();
                         <a href="{{ url('/profile') }}" class="item">
                             <i class="user icon"></i> @lang('header.profile')
                         </a>
-                        <a href="{{ url('/settings') }}" class="item">
+                        <a href="{{ url('/profile/settings') }}" class="item">
                             <i class="settings icon"></i> @lang('header.settings')
                         </a>
                         <div class="divider"></div>

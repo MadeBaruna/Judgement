@@ -34,6 +34,9 @@ Route::post('profile', 'Profile\ProfilePictureUpload@upload');
 Route::post('profile/confirm', 'Profile\ProfilePictureUpload@confirmation');
 Route::post('profile/edit', 'Profile\ProfileController@edit');
 
+Route::get('profile/settings', 'Profile\ProfileController@settings');
+Route::post('profile/settings', 'Profile\ProfileController@settingsPost');
+
 Route::get('profile/groups', 'Profile\ProfileGroupController@groups');
 //end profile
 

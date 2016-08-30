@@ -13,6 +13,10 @@
                         <i class="group icon"></i>
                         @lang('profile.groups')
                     </a>
+                    <a href='{{ url('/profile/settings') }}' class="item @yield('active_settings')">
+                        <i class="setting icon"></i>
+                        @lang('profile.settings')
+                    </a>
                 </div>
             </div>
 

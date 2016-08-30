@@ -68,8 +68,17 @@ class ContestController extends Controller
     {
         $contest = Contest::findOrFail($id);
         $user = Auth::user();
-        $submissions = $user->submissions()->where('contest_id', '=', $id)->orderBy('id', 'DESC')->paginate(15);
+
         $type = $contest->type;
+
+        if ($type == 'individual') {
+            $submissions = $user->submissions()->where('contest_id', '=', $id)->orderBy('id', 'DESC')->paginate(15);
+        } else {
+            $submissions = Submission::where('contest_id', '=', $id)
+                ->where('group_id', '=', $user->group()->id)
+                ->orderBy('id', 'DESC')->paginate(15);
+        }
+
         return view('contest/submissions', [
             'contest' => $contest,
             'submissions' => $submissions

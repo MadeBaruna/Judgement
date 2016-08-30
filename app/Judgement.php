@@ -12,4 +12,9 @@ class Judgement extends Model
     {
         return static::find(1)->option_value;
     }
+
+    public static function lang()
+    {
+        return static::find(2)->option_value;
+    }
 }

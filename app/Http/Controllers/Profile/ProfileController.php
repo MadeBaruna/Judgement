@@ -67,4 +67,30 @@ class ProfileController extends Controller
 
         return view('profile/profile');
     }
+
+    public function settings()
+    {
+        return view('profile/settings');
+    }
+
+    public function settingsPost(Request $request)
+    {
+        $user = Auth::user();
+
+        $rules = [
+            'locale' => 'required'
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors());
+        }
+
+        $user->locale = $request->get('locale');
+
+        $user->save();
+
+        return redirect()->back();
+    }
 }

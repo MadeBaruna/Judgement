@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('type')->default('user');
             $table->string('institution')->default('-');
             $table->integer('current_group_id')->unsigned();
+            $table->string('locale', 5)->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -17,5 +17,6 @@ return [
     'profile_picture' => 'Profile Picture',
     'upload_message' => 'Upload a profile picture from your computer',
     'save' => 'Save',
-
+    'settings' => 'Settings',
+    'language' => 'Language',
 ];

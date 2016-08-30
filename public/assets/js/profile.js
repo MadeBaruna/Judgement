@@ -15,7 +15,7 @@ $(function () {
             onApprove: function () {
                 confirm(1);
             }
-        }).modal('attach events', '.profile .image.profile_picture', 'show');
+        }).modal('attach events', '.profile .image.avatar_big', 'show');
     }
 
     $('input:text, .ui.button').click(function (e) {
@@ -78,7 +78,7 @@ function confirm(confirm) {
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        url: 'profile/confirm',
+        url: '/profile/confirm',
         data: {confirm: confirm},
         success: function(data) {
             if(data != '') {

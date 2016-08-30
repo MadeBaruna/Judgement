@@ -34,6 +34,11 @@ class User extends Authenticatable
         return $this->belongsToMany('Judgement\Group');
     }
 
+    public function group()
+    {
+        return Group::find($this->current_group_id);
+    }
+
     public function submissions()
     {
         return $this->hasMany('Judgement\Submission');

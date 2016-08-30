@@ -8,7 +8,7 @@
     <div class="profile">
         <div class="ui two columns grid">
             <div class="three wide column">
-                <div class="ui small image profile_picture">
+                <div class="ui small image avatar_big">
                     <div class="ui dimmer">
                         <div class="content">
                             <div class="center">

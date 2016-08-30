@@ -30,6 +30,20 @@
                         </a>
                     @endforeach
                 </div>
+
+                @if($contest->type == 'group')
+                    <div class="ui vertical pointing fluid menu">
+                        <div class="item">
+                            <i class="group icon"></i>
+                            <p>Participating as</p>
+                        </div>
+                        <div class="item">
+                            @php($group = Judgement\Group::find(Auth::user()->current_group_id))
+                            <img class="ui avatar image" src="{{ $group->picture() }}"/>
+                            {{ $group->name }}
+                        </div>
+                    </div>
+                @endif
             </div>
 
             <div class="twelve wide column">
