@@ -59,6 +59,11 @@ class User extends Authenticatable
         return $this->hasMany('Judgement\Clarification');
     }
 
+    public function invites()
+    {
+        return $this->hasMany('Judgement\GroupInvite');
+    }
+
     public function picture()
     {
         if (file_exists(public_path('/profiles/pictures/') . $this->id . '.png')) {

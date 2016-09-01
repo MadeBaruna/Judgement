@@ -4,7 +4,7 @@ $(function () {
     });
 
     var profileModal = $('.ui.modal.profile_modal');
-    if(profileModal.length) {
+    if ($('.profile .image.avatar_big').length) {
         profileModal.modal({
             onDeny: function () {
                 confirm(0);

@@ -59,12 +59,12 @@ class Scoreboard extends Model
         $scoreProblemTotal = [];
         $scorePenalty = [];
         $scoreProblemPenalty = [];
+        $submitter = [];
 
         if ($type == 'user_id') {
             $submitter = $contest->users;
         } else {
             foreach ($contest->users as $user) {
-                $submitter = [];
                 $group = Group::find($user->current_group_id);
                 if (!in_array($group, $submitter)) {
                     array_push($submitter, $group);

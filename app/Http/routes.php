@@ -38,6 +38,14 @@ Route::get('profile/settings', 'Profile\ProfileController@settings');
 Route::post('profile/settings', 'Profile\ProfileController@settingsPost');
 
 Route::get('profile/groups', 'Profile\ProfileGroupController@groups');
+
+Route::post('profile/groups/new', 'Profile\ProfileGroupController@newGroupPost');
+Route::post('profile/groups/delete/{id}', 'Profile\ProfileGroupController@deleteGroupPost');
+Route::post('profile/groups/active/{id}', 'Profile\ProfileGroupController@activeGroupPost');
+Route::post('profile/groups/picture/{id}', 'Profile\ProfileGroupController@upload');
+Route::post('profile/groups/invite/{id}', 'Profile\ProfileGroupController@invite');
+Route::post('profile/groups/confirm/{id}', 'Profile\ProfileGroupController@confirm');
+Route::post('profile/groups/leave/{id}', 'Profile\ProfileGroupController@leave');
 //end profile
 
 //admin dashboard

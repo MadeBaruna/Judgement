@@ -2,10 +2,6 @@
 
 @section('title', 'Reset Password')
 
-<!-- Main Content -->
-@section('content')
-    @extends('auth.auth')
-
 @section('title', 'Login')
 
 @section('content')

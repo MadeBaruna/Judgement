@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Judgement\Contest;
 use Judgement\User;
+use Judgement\Group;
 
 class ContestCheck
 {

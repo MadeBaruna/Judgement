@@ -25,7 +25,7 @@ class CreateScoreboardTable extends Migration
 
             $table->foreign('contest_id')->references('id')->on('contests')->onDelete('cascade');
             $table->foreign('problem_id')->references('id')->on('problems')->onDelete('cascade');
-            $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade');
+            $table->foreign('group_id')->references('id')->on('groups');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }

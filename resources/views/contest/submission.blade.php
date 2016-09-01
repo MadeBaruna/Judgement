@@ -128,7 +128,7 @@
                         Source Code
                     </td>
                     <td class="markdown-body">
-                        <pre><code>{{ $code }}</code></pre>
+                        <pre><code class="source_code">{{ $code }}</code></pre>
                     </td>
                 </tr>
                 </tbody>

@@ -43,24 +43,6 @@
                 <label>Contest name</label>
                 <input type="text" name="contest_name" placeholder="Contest name" value="{{ $contest->name }}">
             </div>
-            <div class="field {{ $errors->has('type') ? 'error' : '' }}">
-                <label>Contest type</label>
-                <div class="ui selection dropdown type">
-                    <input type="hidden" name="type" value="{{ $contest->type }}">
-                    <i class="dropdown icon"></i>
-                    <div class="default text">Contest type</div>
-                    <div class="menu">
-                        <div class="item" data-value="individual">
-                            <i class="user icon"></i>
-                            Individual
-                        </div>
-                        <div class="item" data-value="group">
-                            <i class="group icon"></i>
-                            Group
-                        </div>
-                    </div>
-                </div>
-            </div>
             @php($startDateTime = \Carbon\Carbon::parse($contest->start_time))
             <input class="start_time_input" type="hidden" name="start_time">
             <div class="field start_date {{ $errors->has('start_time') ? 'error' : '' }}">

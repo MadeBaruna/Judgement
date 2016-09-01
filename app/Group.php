@@ -6,6 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Group extends Model
 {
+    public $timestamps = false;
+
+    protected $fillable = [
+        'leader_id',
+        'name'
+    ];
+
     public function members()
     {
         return $this->belongsToMany('Judgement\User');
@@ -18,7 +25,7 @@ class Group extends Model
 
     public function picture()
     {
-        if (file_exists(public_path('/profiles/pictures/groups') . $this->id . '.png')) {
+        if (file_exists(public_path('/profiles/pictures/groups/') . $this->id . '.png')) {
             return '/profiles/pictures/groups/' . $this->id . '.png';
         } else {
             return '/assets/images/default.png';

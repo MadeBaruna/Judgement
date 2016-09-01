@@ -151,7 +151,6 @@ class AdminContest extends Controller
 
         $rules = [
             'contest_name' => 'required|max:255',
-            'type' => 'required',
             'start_time' => 'required|date',
             'end_time' => 'required|date',
             'language' => 'required'
@@ -180,7 +179,6 @@ class AdminContest extends Controller
 
         $contest->update([
             'name' => $data['contest_name'],
-            'type' => $data['type'],
             'start_time' => $data['start_time'],
             'end_time' => $data['end_time'],
             'status' => $status,
