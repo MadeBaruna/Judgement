@@ -7,6 +7,7 @@ use Judgement\Http\Controllers\ContestTrait;
 use Judgement\Http\Controllers\Controller;
 use Judgement\Contest;
 use Judgement\Scoreboard;
+use Judgement\Problem;
 use Illuminate\Http\Request;
 use Validator;
 
