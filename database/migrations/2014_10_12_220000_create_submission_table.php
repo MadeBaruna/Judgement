@@ -22,7 +22,7 @@ class CreateSubmissionTable extends Migration
             $table->integer('language_id')->unsigned();
             $table->integer('score');
             $table->string('status');
-            $table->timestamp('submitted_at');
+            $table->timestamp('submitted_at')->useCurrent();
             $table->string('filename');
 
             $table->foreign('contest_id')->references('id')->on('contests')->onDelete('cascade');
