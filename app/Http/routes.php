@@ -83,6 +83,7 @@ Route::post('admin/problem/{id}/testcases', 'Admin\AdminTestcase@newTestcasePost
 
 Route::get('admin/scoreboard/{id}', 'Admin\AdminScoreboard@scoreboard');
 Route::get('admin/clarifications/{id}', 'Admin\AdminClarifications@clarifications');
+Route::get('admin/clarification/{id}/{cla}', 'Admin\AdminClarifications@clarificationView');
 Route::post('admin/clarifications/{id}/answer/{cla}', 'Admin\AdminClarifications@answer');
 //end admin dashboard
 

@@ -55,4 +55,23 @@ class AdminClarifications extends Controller
 
         return redirect('/admin/clarifications/' . $contest->id);
     }
+
+    public function clarificationView($id, $cla)
+    {
+        $contest = Contest::findOrFail($id);
+        if ($contest->clarifications->contains($cla)) {
+            $clarification = Clarification::findOrFail($cla);
+        } else {
+            return response(404);
+        }
+
+        $problem = Problem::find($clarification->problem_id);
+
+        return response()->json([
+            'title' => $clarification->title,
+            'problem' => $problem->name,
+            'question' => $clarification->question,
+            'answer' => $clarification->is_answered ? $clarification->answer : 'Not answered yet'
+        ]);
+    }
 }

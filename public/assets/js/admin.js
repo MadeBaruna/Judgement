@@ -50,7 +50,7 @@ $(function () {
         if (clarificationAdminModal.length) {
             var contestId = $(this).data('contest');
             var claId = $(this).data('clarification');
-            $.get('/contest/' + contestId + '/clarification/' + claId,
+            $.get('/admin/clarification/' + contestId + '/' + claId,
                 function (data) {
                     $('.clarification_admin_modal form').attr('action', '/admin/clarifications/'
                         + contestId + '/answer/' + claId);
