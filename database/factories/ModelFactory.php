@@ -29,3 +29,9 @@ $factory->define(Judgement\Problem::class, function (Faker\Generator $faker) {
         'author_id' => 1,
     ];
 });
+
+$factory->define(Judgement\Sandbox::class, function (Faker\Generator $faker) {
+    return [
+        'is_available' => 1
+    ];
+});

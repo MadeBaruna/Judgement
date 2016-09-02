@@ -23,5 +23,7 @@ class DatabaseSeeder extends Seeder
             'remember_token' => str_random(10),
             'type' => 'admin'
         ]);
+
+        $this->call(WorkerSeeder::class);
     }
 }
