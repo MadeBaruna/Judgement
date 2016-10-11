@@ -140,6 +140,7 @@ class Submission extends Model
                 $answer = fopen($testcase->out(), 'r');
                 $output = fopen($output, 'r');
 
+                $isRight = true;
                 while (!feof($answer)) {
                     $lineA = fgets($answer);
                     $lineO = fgets($output);
@@ -147,14 +148,18 @@ class Submission extends Model
                         $this->status = 'WA';
                         $this->score = $score;
                         $this->save();
+                        $isRight = false;
+                        break;
                     }
                 }
 
                 fclose($answer);
                 fclose($output);
 
-                $rightAnswer++;
-                $score = $rightAnswer / $testcases->count() * 100;
+                if ($isRight) {
+                    $rightAnswer++;
+                    $score = $rightAnswer / $testcases->count() * 100;
+                }
             } else {
                 $this->status = $status;
                 $this->score = $score;
@@ -163,8 +168,8 @@ class Submission extends Model
             }
         }
 
-        if ($this->status != 'Pending') {
-            $this->status;
+        if ($this->status == 'Pending') {
+            $this->status = 'AC';
             $this->score = $score;
             $this->save();
         }
