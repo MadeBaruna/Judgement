@@ -169,11 +169,10 @@ class Submission extends Model
 
         if ($this->status == 'Pending') {
             $this->status = 'AC';
-            $this->score = $score;
-            $this->save();
         }
 
-        dump($this->status);
+        $this->score = $score;
+        $this->save();
         return;
     }
 
