@@ -147,7 +147,6 @@ class Submission extends Model
                         $this->status = 'WA';
                         $this->score = $score;
                         $this->save();
-                        return;
                     }
                 }
 
