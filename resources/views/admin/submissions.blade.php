@@ -56,6 +56,7 @@
             <thead>
             <tr>
                 <th>ID</th>
+                <th>User</th>
                 <th>Problem</th>
                 <th>Language</th>
                 <th>Score</th>
@@ -69,6 +70,9 @@
                 <tr>
                     <td>
                         {{ $submission->id }}
+                    </td>
+                    <td>
+                        {{ $submission->user->name }}
                     </td>
                     <td>
                         {{ Judgement\Problem::find($submission->problem_id)->name }}
@@ -125,7 +129,7 @@
             @if($submissions->total() != 0)
                 <tfoot>
                 <tr>
-                    <th colspan="7">
+                    <th colspan="8">
                         <div class="ui right floated pagination menu">
                             @include('layouts.pagination', ['page' => $submissions])
                         </div>
