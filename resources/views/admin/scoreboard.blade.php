@@ -1,6 +1,6 @@
 @extends('admin.contest')
 
-@section('title', 'Home')
+@section('title', 'Scoreboard')
 
 @section('active_scoreboard', 'active')
 

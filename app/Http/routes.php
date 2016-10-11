@@ -85,6 +85,9 @@ Route::get('admin/scoreboard/{id}', 'Admin\AdminScoreboard@scoreboard');
 Route::get('admin/clarifications/{id}', 'Admin\AdminClarifications@clarifications');
 Route::get('admin/clarification/{id}/{cla}', 'Admin\AdminClarifications@clarificationView');
 Route::post('admin/clarifications/{id}/answer/{cla}', 'Admin\AdminClarifications@answer');
+
+Route::get('admin/submissions/{id}', 'Admin\AdminSubmission@submission');
+Route::get('admin/submission/{id}/{sub}', 'Admin\AdminSubmission@submissionView');
 //end admin dashboard
 
 Route::get('time', 'Time@getCurrentTime');

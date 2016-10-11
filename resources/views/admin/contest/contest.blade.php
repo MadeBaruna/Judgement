@@ -76,8 +76,10 @@
                             <div class="ui black label">Not Active</div>
                         @elseif($contest->status == 'Not Started')
                             <div class="ui gray label">{{ $contest->status }}</div>
-                        @else
+                        @elseif($contest->status == 'Started')
                             <div class="ui green label">{{ $contest->status }}</div>
+                        @else
+                            <div class="ui red label">{{ $contest->status }}</div>
                         @endif
                     </td>
                     <td>

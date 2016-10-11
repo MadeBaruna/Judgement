@@ -62,6 +62,18 @@ $(function () {
             clarificationAdminModal.modal('show');
         }
     });
+
+    $('.ui.dropdown.problem_list').dropdown({
+        onChange: function (value, text, $selectedItem) {
+            $('.search_sub').attr('href', '?p=' + value + '&u=' + $('.userlisting').val());
+        }
+    });
+
+    $('.ui.dropdown.user_list').dropdown({
+        onChange: function (value, text, $selectedItem) {
+            $('.search_sub').attr('href', '?p=' + $('.problem').val() + '&u=' + value);
+        }
+    });
 });
 
 function updateDateTime(type) {

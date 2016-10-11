@@ -1,6 +1,6 @@
 @extends('contest.index')
 
-@section('title', 'Scoreboard')
+@section('title', 'Submission')
 
 @section('active_submissions', 'active')
 
