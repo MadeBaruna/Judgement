@@ -164,7 +164,6 @@ class Submission extends Model
                 $this->status = $status;
                 $this->score = $score;
                 $this->save();
-                return;
             }
         }
 
@@ -173,6 +172,8 @@ class Submission extends Model
             $this->score = $score;
             $this->save();
         }
+
+        dump($this->status);
         return;
     }
 
