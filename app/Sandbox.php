@@ -37,6 +37,7 @@ class Sandbox extends Model
             ' 2>&1';
 
         exec($command, $output, $status);
+        dump($output, $status);
         return $status;
     }
 
@@ -60,6 +61,7 @@ class Sandbox extends Model
             ' 2>&1';
 
         exec($command, $output, $status);
+        dd($output, $status);
         return $status;
     }
 
@@ -74,6 +76,7 @@ class Sandbox extends Model
             ' 2>&1';
 
         exec($command, $output, $status);
+        dump($output, $status);
 
         $this->is_available = 1;
         $this->submission_id = null;
