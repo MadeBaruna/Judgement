@@ -61,7 +61,7 @@ class Sandbox extends Model
             ' 2>&1';
 
         exec($command, $output, $status);
-        dd($output, $status);
+        dump($output, $status);
         return $status;
     }
 

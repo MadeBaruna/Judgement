@@ -164,9 +164,11 @@ class Submission extends Model
             }
         }
 
-        $this->status = 'AC';
-        $this->score = $score;
-        $this->save();
+        if ($this->status != 'Pending') {
+            $this->status;
+            $this->score = $score;
+            $this->save();
+        }
         return;
     }
 
