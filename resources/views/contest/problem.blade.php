@@ -35,7 +35,7 @@
                     Time Limit
                     <div class="detail">{{ $currentProblem->time_limit == 0 ? 'No Limit' : $currentProblem->time_limit . ' Second' }}</div>
                 </div>
-                <div class="ui grey image large label">
+                <div class="ui blue image large label">
                     Memory Limit
                     <div class="detail">{{ $currentProblem->memory_limit == 0 ? 'No Limit' :
                     ($currentProblem->memory_limit >= 1000 ? $currentProblem->memory_limit/1000 . ' MB' :
