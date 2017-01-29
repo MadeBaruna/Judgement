@@ -38,18 +38,14 @@ class AdminSubmission extends Controller
         ]);
     }
 
-    public function submissionView($id, $sub)
+   public function submissionView($id, $sub)
     {
         $contest = Contest::findOrFail($id);
-        $submission = Submission::find($sub);
-        $user = Auth::user();
-        if ($submission->user_id != $user->id) {
-            return redirect('/contest/' . $id . '/submissions');
-        }
+        $submission = Submission::findOrFail($sub);
         $problem = Problem::find($submission->problem_id);
         $language = Language::find($submission->language_id);
-        if ($language_id -> 3) {
-            $contents = " ";
+        if ($language -> 3) {
+            $code = " ";
             foreach (glob(
                 'contest/' . $id .
                 '/problem/' . $problem->id .
@@ -57,7 +53,7 @@ class AdminSubmission extends Controller
                 '/' . $submission->id .
                 '/*/*.class') as $filename)
             {
-                $contents .= basename($filename) . "/n" . file_get_contents($filename). "/n";
+                $code .= basename($filename) . "/n" . file_get_contents($filename). "/n";
             }
         }else{
             $source = storage_path(
@@ -68,7 +64,7 @@ class AdminSubmission extends Controller
                 '/' . $submission->filename);
             $code = file_get_contents($source);
         }
-        return view('contest/submission', [
+        return view('admin/submission', [
             'contest' => $contest,
             'problem' => $problem,
             'submission' => $submission,
@@ -76,4 +72,3 @@ class AdminSubmission extends Controller
             'code' => $code
         ]);
     }
-}
