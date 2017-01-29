@@ -96,7 +96,7 @@ class ContestController extends Controller
         $problem = Problem::find($submission->problem_id);
         $language = Language::find($submission->language_id);
         if ($language_id -> 3) {
-            $contents = " ";
+            $code = " ";
             foreach (glob(
                 'contest/' . $id .
                 '/problem/' . $problem->id .
@@ -104,7 +104,7 @@ class ContestController extends Controller
                 '/' . $submission->id .
                 '/*/*.class') as $filename)
             {
-                $contents .= basename($filename) . "/n" . file_get_contents($filename). "/n";
+                $code .= basename($filename) . "/n" . file_get_contents($filename). "/n";
             }
         }else{
             $source = storage_path(
