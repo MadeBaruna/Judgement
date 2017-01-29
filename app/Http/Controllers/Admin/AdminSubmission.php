@@ -41,20 +41,34 @@ class AdminSubmission extends Controller
     public function submissionView($id, $sub)
     {
         $contest = Contest::findOrFail($id);
-        $submission = Submission::findOrFail($sub);
-
+        $submission = Submission::find($sub);
+        $user = Auth::user();
+        if ($submission->user_id != $user->id) {
+            return redirect('/contest/' . $id . '/submissions');
+        }
         $problem = Problem::find($submission->problem_id);
         $language = Language::find($submission->language_id);
-
-        $source = storage_path(
-            'contest/' . $id .
-            '/problem/' . $problem->id .
-            '/' . $submission->user->id .
-            '/' . $submission->id .
-            '/' . $submission->filename);
-        $code = file_get_contents($source);
-
-        return view('admin/submission', [
+        if ($language_id -> 3) {
+            $contents = " ";
+            foreach (glob(
+                'contest/' . $id .
+                '/problem/' . $problem->id .
+                '/' . $user->id .
+                '/' . $submission->id .
+                '/*/*.class') as $filename)
+            {
+                $contents .= basename($filename) . "/n" . file_get_contents($filename). "/n";
+            }
+        }else{
+            $source = storage_path(
+                'contest/' . $id .
+                '/problem/' . $problem->id .
+                '/' . $user->id .
+                '/' . $submission->id .
+                '/' . $submission->filename);
+            $code = file_get_contents($source);
+        }
+        return view('contest/submission', [
             'contest' => $contest,
             'problem' => $problem,
             'submission' => $submission,
