@@ -95,7 +95,7 @@ class ContestController extends Controller
         }
         $problem = Problem::find($submission->problem_id);
         $language = Language::find($submission->language_id);
-        if ($language_id -> 3) {
+        if ($language -> 3) {
             $code = " ";
             foreach (glob(
                 'contest/' . $id .
